@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Alina Kuznetsova</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    #work-intro h2 {
+      font-size: clamp(13px, 1.4vw, 18px);
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .ascii-layer-proj {
+      position: absolute;
+      top: 0; left: 0;
+      white-space: pre;
+      font-family: 'Courier New', monospace;
+      font-size: 4px;
+      line-height: 1.14;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+      will-change: transform;
+      -webkit-font-smoothing: none;
+    }
+    .ascii-layer-proj:first-child { position: relative; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div id="portrait-col">
+      <div class="ascii-wrap" id="wrap-handshake" style="position:relative;margin-top:2vh;"></div>
+      <canvas class="particle-canvas" id="pc-hero"></canvas>
+    </div>
+    <div id="info-col" style="display:flex;flex-direction:column;justify-content:space-between;padding:64px 72px 72px 56px;height:100%">
+      <div class="info-top" style="display:flex;flex-direction:column;padding-top:15vh;">
+        <div id="name">Alina<span class="last">Kuznetsova</span></div>
+        <div class="h-rule"></div>
+        <div id="descriptor">
+          Technologist building at the intersection of <em>AI and creative practice</em>, from live performance systems to generative worlds.
+        </div>
+        <nav id="hero-links">
+          <a href="mailto:alinakuznetsova7@gmail.com">Email — alinakuznetsova7@gmail.com</a>
+          <a href="https://www.linkedin.com/in/alina-kuznetsova-74a386204/" target="_blank">LinkedIn — alinakkuznetsova</a>
+        </nav>
+      </div>
+      <div id="work-intro">
+        <h2>What I've built recently.</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01: THE REMATCH — icon RIGHT -->
+  <section class="project-section" id="rematch">
+    <div class="project-info text-left">
+      <h2 class="project-title">The <em>Rematch</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Computer Vision</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Physical Computing</span>
+      </div>
+      <p class="project-desc">A projected chess interface that detects physical moves via computer vision and responds with an AI opponent in real time, making it possible to play against a machine on a real board.</p>
+      <a class="project-link" href="rematch/index.html">View project</a>
+    </div>
+    <div class="project-visual" id="visual-rematch">
+      <div id="wrap-chess" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-rematch"></canvas>
+    </div>
+  </section>
+
+  <!-- 02: BORDERLESS — icon LEFT -->
+  <section class="project-section visual-left" id="borderless">
+    <div class="project-visual" id="visual-borderless">
+      <div id="wrap-mush" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-borderless"></canvas>
+    </div>
+    <div class="project-info text-right">
+      <h2 class="project-title">Border<em>less</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Generative AI</span>
+        <span class="project-tag">Stable Diffusion</span>
+        <span class="project-tag">WebXR</span>
+        <span class="project-tag">Group Project</span>
+      </div>
+      <p class="project-desc">An interactive world built from user sketches. A LoRA and ControlNet pipeline transforms each drawing into a stylised generative asset, placed automatically into a 360 parallax environment in Three.js. Once the world is fully grown, users can step inside and explore it via VR.</p>
+      <a class="project-link" href="borderless/index.html">View project</a>
+    </div>
+  </section>
+
+  <!-- 03: PIBLO — icon RIGHT -->
+  <section class="project-section" id="piblo">
+    <div class="project-info text-left">
+      <h2 class="project-title">Piblo the <em>Plutonian</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Conversational AI</span>
+        <span class="project-tag">LLM</span>
+        <span class="project-tag">Python</span>
+      </div>
+      <p class="project-desc">A conversational interface designed to make complex space mission data more accessible and engaging. Memory, personality, and a 10,000-record dataset retrieval system, all wrapped in the form of a virtual alien.</p>
+      <a class="project-link" href="piblo/index.html">View project</a>
+    </div>
+    <div class="project-visual" style="background:var(--bg)" id="visual-piblo">
+      <div id="ufo-wrap" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-piblo"></canvas>
+    </div>
+  </section>
+
+  <!-- 04: FROM HAND TO ALGORITHM — icon LEFT -->
+  <section class="project-section visual-left" id="midjourney">
+    <div class="project-visual" id="visual-midjourney">
+      <div id="wrap-brush" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-midjourney"></canvas>
+    </div>
+    <div class="project-info text-right">
+      <h2 class="project-title">From Hand<br>to <em>Algorithm</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Midjourney V7</span>
+        <span class="project-tag">Fine Art</span>
+        <span class="project-tag">AI Product Design</span>
+      </div>
+      <p class="project-desc">An exploration of combining personal craft with generative AI, using an oil painting as the starting point and carefully directing the algorithm to translate it into product.</p>
+      <a class="project-link" href="midjourney/index.html">View project</a>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function() {
+
+    // ── HERO PORTRAIT ──
+    Portfolio.renderASCII({
+      src: 'images/face.png',
+      wrap: document.getElementById('wrap-handshake'),
+      fontSize: 3,
+      toneMode: 'portrait',
+      scale: 0.88,
+      onDone: function(layers, PX, PY) {
+        Portfolio.initParallax(document.getElementById('wrap-handshake'), layers, PX, PY, 0.7);
+      }
+    });
+    var pcHero = document.getElementById('pc-hero');
+    if (pcHero) Portfolio.initEdgeParticles(pcHero, ['AI','&&','//','{}','<>','01','ML','++','>>','::'], 28);
+
+    // ── PROJECT ICONS -- exact copy of project page renderer ──
+    var NUM_LAYERS = 10;
+    var RAMP = " .-_,:;~=+<>[]{}()|/tfjrxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
+    var R = RAMP.length;
+    var OPACITIES = [0.14,0.22,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0];
+    var PX = [0.4,0.9,1.6,2.5,3.6,5.0,6.6,8.4,10.5,13.0];
+    var PY = [0.3,0.6,1.1,1.7,2.4,3.3,4.4,5.6,7.0,8.8];
+
+    function renderIcon(src, wrapId, visualId, pcId, chars, scale) {
+      var wrap = document.getElementById(wrapId);
+      var col = document.getElementById(visualId);
+      scale = scale || 0.97;
+      var layerEls = [];
+      for (var i = 0; i < NUM_LAYERS; i++) {
+        var pre = document.createElement('pre');
+        pre.className = 'ascii-layer-proj';
+        pre.style.zIndex = i;
+        wrap.appendChild(pre);
+        pre.style.color = 'rgba(237,232,223,' + OPACITIES[i] + ')';
+        layerEls.push(pre);
+      }
+      var off = document.createElement('canvas');
+      off.style.display = 'none';
+      document.body.appendChild(off);
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        setTimeout(function() {
+          var CW = 4 * 0.601, CH = 4 * 1.14;
+          var imgA = img.width / img.height;
+          var ROWS = Math.round(col.clientHeight * scale / CH);
+          var COLS = Math.round(ROWS * imgA * (CH / CW));
+          var maxC = Math.round(col.clientWidth * 0.97 / CW);
+          if (COLS > maxC) { COLS = maxC; ROWS = Math.round(COLS / imgA * (CW / CH)); }
+          off.width = COLS; off.height = ROWS;
+          var ctx = off.getContext('2d');
+          ctx.drawImage(img, 0, 0, COLS, ROWS);
+          var data = ctx.getImageData(0, 0, COLS, ROWS).data;
+          var raw = [];
+          for (var i = 0; i < data.length; i += 4) {
+            var r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+            if (a < 30 || (r > 230 && g > 230 && b > 230)) { raw.push(-1); continue; }
+            var lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+            var lv = 1 - lum;
+            raw.push(lv < 0.04 ? -1 : Math.pow(lv, 0.85));
+          }
+          var valid = raw.filter(function(v){return v>=0;}).sort(function(a,b){return a-b;});
+          var lo = valid[Math.floor(valid.length*0.005)];
+          var hi = valid[Math.floor(valid.length*0.995)];
+          var norm = raw.map(function(v){return v<0?-1:Math.max(0,Math.min(1,(v-lo)/(hi-lo)));});
+          var bw = 1 / NUM_LAYERS;
+          for (var li = 0; li < NUM_LAYERS; li++) {
+            var mn = li*bw, mx = mn+bw+0.012, out = '';
+            for (var row = 0; row < ROWS; row++) {
+              for (var c = 0; c < COLS; c++) {
+                var d = norm[row*COLS+c];
+                out += (d>=0&&d>=mn&&d<mx) ? RAMP[Math.min(Math.floor(d*R),R-1)] : ' ';
+              }
+              out += '\n';
+            }
+            layerEls[li].textContent = out;
+          }
+          var tx=0,ty=0,cx=0,cy=0;
+          window.addEventListener('mousemove',function(e){
+            tx=(e.clientX/window.innerWidth-0.5)*2;
+            ty=(e.clientY/window.innerHeight-0.5)*2;
+          });
+          (function tick(){
+            cx+=(tx-cx)*0.055; cy+=(ty-cy)*0.055;
+            wrap.style.transform='perspective(1000px) rotateY('+(cx*8)+'deg) rotateX('+(-cy*5)+'deg)';
+            for(var i=0;i<layerEls.length;i++)
+              layerEls[i].style.transform='translate('+(cx*-PX[i]*0.7)+'px,'+(cy*-PY[i]*0.7)+'px)';
+            requestAnimationFrame(tick);
+          })();
+        }, 100);
+      };
+      img.src = src;
+      var pc = document.getElementById(pcId);
+      if (pc && Portfolio.particleChars[chars]) {
+        Portfolio.initEdgeParticles(pc, Portfolio.particleChars[chars], 28);
+      }
+    }
+
+    renderIcon('images/chess.webp', 'wrap-chess',  'visual-rematch',    'pc-rematch',    'rematch');
+    renderIcon('images/mush.webp',  'wrap-mush',   'visual-borderless', 'pc-borderless', 'borderless');
+    renderIcon('images/skull.webp', 'wrap-brush',  'visual-midjourney', 'pc-midjourney', 'midjourney');
+
+    // ── UFO ──
+    renderIcon('images/ufo.webp', 'ufo-wrap', 'visual-piblo', 'pc-piblo', 'piblo', 0.55);
+
+  })();
+  </script>
+</body>
+</html>

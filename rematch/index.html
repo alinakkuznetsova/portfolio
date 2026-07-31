@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The Rematch — Alina Kuznetsova</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0906;--ink:#ede8df;--muted:rgba(237,232,223,0.62);
+  --faint:rgba(237,232,223,0.09);--warm:#c8b99a;
+  --sans:'Share Tech',sans-serif;--mono:'Courier New',monospace;
+}
+html,body{width:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.018) 2px,rgba(0,0,0,0.018) 3px);pointer-events:none;z-index:9999}
+
+a.back{position:fixed;top:32px;left:48px;z-index:100;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.2s}
+a.back::before{content:"";width:20px;height:1px;background:currentColor}
+a.back:hover{color:var(--ink)}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;align-items:center;position:relative;overflow:hidden}
+#hero-visual{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#chess-wrap{position:relative;will-change:transform}
+.ascii-layer{position:absolute;top:0;left:0;white-space:pre;font-family:'Courier New',monospace;font-size:4px;line-height:1.14;letter-spacing:0.02em;pointer-events:none;will-change:transform}
+.ascii-layer:first-child{position:relative}
+#hero-info{padding:0 64px 0 48px}
+.eyebrow{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+#hero-info h1{font-size:clamp(52px,7vw,96px);font-weight:400;line-height:0.95;letter-spacing:-0.01em;margin-bottom:28px}
+#hero-info h1 em{font-style:italic;color:var(--warm)}
+.hero-sub{font-size:clamp(13px,1.2vw,16px);color:var(--muted);max-width:420px;line-height:1.85;margin-bottom:36px}
+.hero-meta{display:flex;flex-direction:column;gap:12px}
+.hero-meta-item{display:flex;gap:16px;align-items:baseline}
+.hero-meta-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);width:100px;flex-shrink:0}
+.hero-meta-value{font-size:12px;color:var(--ink)}
+
+/* SHARED */
+.section{padding:120px 96px;max-width:1400px;margin:0 auto}
+.section-label{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.section h2{font-size:clamp(24px,2.8vw,38px);font-weight:400;letter-spacing:-0.01em;line-height:1.2;margin-bottom:36px;max-width:800px}
+.section h2 em{font-style:italic;color:var(--warm)}
+.body-text{font-size:15px;line-height:1.9;color:var(--muted);max-width:680px}
+.body-text p{margin-bottom:20px}
+.body-text p:last-child{margin-bottom:0}
+.divider{border:none;border-top:1px solid var(--faint);margin:0}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.two-col-wide{display:grid;grid-template-columns:3fr 2fr;gap:80px;align-items:start;margin-top:60px}
+
+/* IMAGES */
+.img-block{border:1px solid var(--faint)}
+.img-block img{width:100%;display:block}
+.img-caption{padding:14px 16px;font-size:11px;color:var(--muted);font-family:var(--mono);border-top:1px solid var(--faint);line-height:1.6}
+
+/* INTRO */
+#intro{max-width:1400px;margin:0 auto}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;align-items:center}
+.intro-image{position:relative;padding:60px 48px}
+.intro-image img{width:100%;height:auto;display:block;max-height:80vh;object-fit:contain}
+.intro-text{padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
+.intro-eyebrow{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.intro-heading{font-size:clamp(26px,2.8vw,38px);font-weight:400;line-height:1.2;letter-spacing:-0.01em;margin-bottom:36px}
+.intro-heading em{font-style:italic;color:var(--warm)}
+
+/* FLOW DIAGRAM */
+.flow-outer{display:flex;justify-content:center;margin-top:64px}
+.flow-container{display:grid;grid-template-columns:180px 280px 180px;gap:0;align-items:start}
+.flow-left{position:relative;display:flex;flex-direction:column;align-items:flex-end;padding-right:0}
+.flow-bracket{position:relative;border-left:1px solid var(--faint);border-top:1px solid var(--faint);border-bottom:1px solid var(--faint);margin-right:0;display:flex;align-items:center}
+.flow-bracket-label{position:absolute;left:-160px;top:50%;transform:translateY(-50%);width:140px}
+.main-py-box{padding:14px 16px;border:1px solid rgba(200,185,154,0.3);font-size:10px;font-family:var(--mono);color:var(--warm);background:rgba(200,185,154,0.04);text-align:center;white-space:nowrap}
+.main-py-sub{font-size:9px;color:var(--muted);display:block;margin-top:4px;font-style:italic;white-space:normal}
+.flow-centre{display:flex;flex-direction:column;align-items:center}
+.flow-node{padding:16px 20px;border:1px solid var(--faint);font-size:11px;font-family:var(--mono);color:var(--ink);text-align:center;background:rgba(237,232,223,0.03);width:100%}
+.flow-node .fn-sub{font-size:9px;color:var(--muted);margin-top:4px;display:block;font-style:italic}
+.flow-node.io{border-color:var(--warm);color:var(--warm)}
+.flow-arrow{width:1px;height:28px;background:var(--faint);margin:0 auto;position:relative;flex-shrink:0}
+.flow-arrow::after{content:"";position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--faint)}
+.flow-right{display:flex;flex-direction:column;padding-left:16px}
+.calib-row{display:flex;align-items:center;gap:8px}
+.calib-arrow{font-size:11px;color:var(--faint);font-family:var(--mono)}
+.calib-box{padding:10px 14px;border:1px solid rgba(168,230,25,0.25);font-size:10px;font-family:var(--mono);color:#a8e619;background:rgba(168,230,25,0.03);white-space:nowrap}
+
+/* TECH CARDS */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--faint);margin-top:60px;border:1px solid var(--faint)}
+.tech-card{background:var(--bg);padding:36px 32px}
+.tech-num{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:14px}
+.tech-card h3{font-size:16px;font-weight:400;margin-bottom:12px;line-height:1.3}
+.tech-card p{font-size:12.5px;line-height:1.8;color:var(--muted)}
+.tech-card code{font-family:var(--mono);font-size:11px;background:rgba(237,232,223,0.06);padding:1px 5px;color:var(--warm)}
+
+/* PERFORMANCE SECTIONS */
+.perf-section{padding:120px 96px;max-width:1400px;margin:0 auto}
+.perf-h2{font-size:clamp(24px,2.8vw,38px);font-weight:400;letter-spacing:-0.01em;line-height:1.2;margin-bottom:48px;max-width:800px}
+.perf-h2 em{font-style:italic;color:var(--warm)}
+
+/* VIDEO */
+.video-wrap{aspect-ratio:16/9;background:#111;border:1px solid var(--faint);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0}
+.video-wrap iframe{width:100%;height:100%;display:block;border:none}
+
+/* LESSONS CARDS */
+.lessons-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--faint);margin-top:60px;border:1px solid var(--faint)}
+.lesson-card{background:var(--bg);padding:48px 40px}
+.lesson-num{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:14px}
+.lesson-card h3{font-size:18px;font-weight:400;margin-bottom:20px;line-height:1.3}
+.lesson-card p{font-size:13px;line-height:1.9;color:var(--muted)}
+.lesson-card p + p{margin-top:16px}
+.lesson-card code{font-family:var(--mono);font-size:11px;background:rgba(237,232,223,0.06);padding:1px 5px;color:var(--warm)}
+
+.proj-footer{padding:80px 96px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;max-width:1400px;margin:0 auto}
+.proj-footer a{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.proj-footer a:hover{color:var(--ink)}
+
+@media(max-width:1000px){
+  #hero,.intro-grid{grid-template-columns:1fr}
+  #hero-visual{height:55vh}
+  #hero-info,.intro-text,.section,.perf-section,.proj-footer{padding-left:32px;padding-right:32px}
+  .two-col,.two-col-wide,.tech-grid,.lessons-grid,.flow-container{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html#rematch">Back to portfolio</a>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-visual">
+    <div id="chess-wrap"></div>
+  </div>
+  <div id="hero-info">
+    <div class="eyebrow">Project 01 / 04 · UAL MSc · 2026 · Grade A</div>
+    <h1>The <span style="color:var(--warm)">Rematch</span></h1>
+    <p class="hero-sub">A live computer vision system that detects physical chess moves via webcam and projects an AI opponent's responses directly onto the board in real time.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Hardware</span><span class="hero-meta-value">Webcam, projector, physical board</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Software</span><span class="hero-meta-value">Python, OpenCV, python-chess, Stockfish</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Repo</span><span class="hero-meta-value"><a href="https://git.arts.ac.uk/a-kuznetsova0620251/performing-project" target="_blank" style="color:var(--ink);text-decoration:none;">git.arts.ac.uk/…/performing-project</a></span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-grid">
+    <div class="intro-image">
+      <img src="images/board-in-dark.jpeg" alt="The board in the dark with projected pieces glowing"/>
+    </div>
+    <div class="intro-text">
+      <div class="intro-eyebrow">What was built</div>
+      <h2 class="intro-heading">A way to play against an automated opponent <em>on a real board.</em></h2>
+      <div class="body-text">
+        <p>As a serious chess player, I often find myself having to play online due to a lack of in-person opponents. But I find this defeats the experience: reduced to a tiny screen, the physical presence and atmosphere of a real game are completely lost.</p>
+        <p>I wanted to solve this by building an interface that combines computer vision and projection to let me play against AI on a physical board, with the engine's pieces projected directly onto it in real time. A webcam mounted above the board reads my moves as I make them. The system detects which piece I moved, sends it to the engine, and projects white's response as glowing pieces on the board itself.</p>
+        <p>Rather than a generic chess interface, I chose to frame it around a specific historical moment — which gave the project its conceptual weight, and became the basis for the live demonstration.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- CONCEPT -->
+<section class="section">
+  <div class="section-label">The Concept</div>
+  <h2>Replaying the moment <em>a machine beat a human</em> for the first time in history.</h2>
+  <div class="two-col-wide">
+    <div class="body-text">
+      <p>In 1997, IBM's Deep Blue defeated Garry Kasparov — then the reigning world chess champion — in a six-game match. It was the first time a computer had beaten a world champion under standard tournament conditions, and it marked a turning point: the moment machines crossed a threshold in strategic reasoning that had previously been considered distinctly human.</p>
+      <p>The sixth and deciding game is the one I chose to restage. Kasparov's seventh move in that game is widely regarded in the chess community as the error that lost him the match. Rather than recreating the game as it happened, I start from the position immediately before that move — take Kasparov's seat — and play differently, seeing how the game might have unfolded from that moment.</p>
+      <p>My pieces are physical; the engine's are projected. This was a practical decision, but also a conceptual one: I wanted to be visibly present at the board, playing against an opponent that exists only as light and code.</p>
+      <p>I set the engine to 2750 Elo, matching Deep Blue's estimated 1997 strength, and gave it three seconds per move — long enough to feel like it was thinking, short enough to keep the game moving.</p>
+    </div>
+    <div>
+      <div class="img-block">
+        <img src="images/starting-position.png" alt="Starting position"/>
+        <div class="img-caption">Deep Blue vs Kasparov (1997), Game 6 — immediately before Black's 7...h6. White has just played Nf3 (highlighted). Black to move.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- THE SYSTEM -->
+<section class="section">
+  <div class="section-label">The System</div>
+  <h2>Seven modules. <em>One live performance loop.</em></h2>
+  <div class="body-text">
+    <p>The system consists of seven Python modules: six handle one stage each of a pipeline from camera input to projected output, and the seventh — main.py — ties them together by running the live loop, keeping the clock, and projecting status messages such as check and checkmate.</p>
+  </div>
+
+  <div class="flow-outer">
+    <div class="flow-container">
+      <div style="display:flex;align-items:center;justify-content:flex-end;padding-right:16px;padding-top:84px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="main-py-box">main.py<span class="main-py-sub">run loop, clock<br>and status text</span></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-start">
+            <div style="width:20px;height:1px;background:var(--faint)"></div>
+            <div style="width:1px;height:340px;background:var(--faint);margin-left:19px"></div>
+            <div style="width:20px;height:1px;background:var(--faint)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-centre">
+        <div class="flow-node io">overhead camera</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">apply board warp<span class="fn-sub">correct perspective from above</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">motion_detector.py<span class="fn-sub">check board is still</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">occupancy_detector.py<span class="fn-sub">detect where my pieces are</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">game_state.py<span class="fn-sub">infer move, call Stockfish</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">renderer.py<span class="fn-sub">draw white pieces</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">apply projector warp<span class="fn-sub">align projection to board</span></div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node io">projector to board</div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:space-between;padding-left:16px;padding-top:112px;padding-bottom:48px">
+        <div class="calib-row">
+          <div class="calib-arrow">←</div>
+          <div class="calib-box">board_calibration.py</div>
+        </div>
+        <div class="calib-row" style="margin-top:auto;padding-top:304px">
+          <div class="calib-arrow">←</div>
+          <div class="calib-box">projector_calibration.py</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-num">Key Decision 01</div>
+      <h3>A three-stage settling system to avoid reading half-finished moves</h3>
+      <p>Since the camera reads the board continuously, I needed a reliable way to know when a move was actually complete. A simple motion check wasn't enough — a brief pause mid-move could be mistaken for a finished position. The solution was a three-stage state machine: MOVING while a piece was in motion, SETTLING once motion stopped, and STABLE only after the board had stayed still for a full second. The board was only read on reaching STABLE, ensuring the system never acted on an incomplete move.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">Key Decision 02</div>
+      <h3>Brightness comparison, not piece recognition</h3>
+      <p>Rather than identifying pieces by shape, <code>occupancy_detector.py</code> checks which squares are darker than baseline using a proportional drop: <code>(baseline - current) / baseline</code>. This meant a single threshold worked across both light and dark squares — a black piece on a dark square barely changes absolute brightness, but against that square's low baseline the fractional drop is still clearly detectable.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">Key Decision 03</div>
+      <h3>Inferring moves, not reading them</h3>
+      <p><code>game_state.py</code> works backwards: it runs through every legal black move and checks which one produces the arrangement the webcam saw. Almost always only one legal move matches. The only exception was pawn promotion — where the detector cannot distinguish piece type — accepted as a known limitation since reaching promotion against a 2750 Elo engine was extremely unlikely.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:80px">
+    <div class="img-block">
+      <img src="images/board-calib.png" alt="Board calibration warped view"/>
+      <div class="img-caption">board_calibration.py — warped top-down view with grid overlay. Green lines falling correctly between squares confirm the warp is accurate.</div>
+    </div>
+    <div class="img-block">
+      <img src="images/occupancy-detection.png" alt="Occupancy detection debug view"/>
+      <div class="img-caption">occupancy_detector.py — green rectangles mark detected squares. All black pieces in starting positions correctly identified.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- THE DEMO -->
+<section class="perf-section">
+  <div class="section-label">The Demo</div>
+  <h2 class="perf-h2">Playing the <em>full game from start to checkmate.</em></h2>
+  <div style="display:grid;grid-template-columns:3fr 2fr;gap:60px;align-items:start;margin-top:60px;">
+    <div class="video-wrap" style="padding:0;overflow:hidden;">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/g6X42utHxQ0?modestbranding=1&rel=0&showinfo=0" title="The Rematch — Full Performance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+    </div>
+    <div class="body-text" style="max-width:100%;font-size:13px;line-height:1.85;">
+      <p>Demonstrated as a live performance in front of an audience. Starting from the position immediately before Kasparov's seventh move in Game 6, I played Black against the engine at 2750 Elo.</p>
+      <p>The full game ran from first move to checkmate — each module completing its role without interruption. The engine put me in checkmate in around three minutes.</p>
+      <p>The loss was expected. The point was never to beat it, but to replay the game from that specific position and see how else it could unfold.</p>
+      <p>My pieces being physical while the engine's were projected drew a clear line between the two sides: I was present at the board; the machine existed only as light.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- WHAT I LEARNT -->
+<section class="perf-section">
+  <div class="section-label">What I Learnt</div>
+  <h2 class="perf-h2">Two problems. <em>Two lessons worth keeping.</em></h2>
+  <div class="lessons-grid">
+    <div class="lesson-card">
+      <div class="lesson-num">Problem 01</div>
+      <h3>When to stop fixing code and fix the physical setup instead</h3>
+      <p>My original board had dark brown squares that proved too dark for the occupancy detector. I spent time trying to solve it in software — attempting texture-based detection, trying to exclude projected squares from the read — but each fix introduced a new problem. Eventually I accepted that the right answer was to reprint the board with lighter dark squares.</p>
+      <p>Once I did, the proportional brightness threshold worked cleanly across the whole board. Knowing when to stop adjusting the code and change the physical setup instead turned out to be one of the more useful things I took from this project.</p>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-num">Problem 02</div>
+      <h3>If you add something the night before, test every variation of it</h3>
+      <p>Everything was working smoothly until the night before the first performance, when I decided to project illuminated status text onto the board announcing check and checkmate. I tested it and it seemed fine, so I included it.</p>
+      <p>What caught the bug was user testing — getting people to play multiple rounds across different board configurations. Testing enough variations revealed that when the text landed over a pawn specifically, the game froze. Pawns are the smallest piece, which makes them the most susceptible to a change in brightness: the projected text raised the square above the detection threshold, and the piece disappeared from the read. Solo testing hadn't caught it because the failure only appeared in specific positions that weren't obvious to anticipate in advance.</p>
+      <p>The fix was straightforward: make the text smaller and dimmer so it no longer overpowered the board. It was a reminder that getting something in front of users quickly is what surfaces the failures that matter.</p>
+    </div>
+  </div>
+</section>
+
+<div class="proj-footer">
+  <a href="../index.html#rematch">Back to portfolio</a>
+  <a href="../borderless/index.html">Next: Borderless</a>
+</div>
+
+<script>
+(function() {
+  var NUM_LAYERS = 10;
+  var RAMP = " .-_,:;~=+<>[]{}()|/tfjrxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
+  var R = RAMP.length;
+  var OPACITIES = [0.14,0.22,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0];
+  var PX = [0.4,0.9,1.6,2.5,3.6,5.0,6.6,8.4,10.5,13.0];
+  var PY = [0.3,0.6,1.1,1.7,2.4,3.3,4.4,5.6,7.0,8.8];
+  var wrap = document.getElementById('chess-wrap');
+  var layerEls = [];
+  for(var i=0;i<NUM_LAYERS;i++){
+    var pre=document.createElement('pre');
+    pre.className='ascii-layer';
+    pre.style.color='rgba(237,232,223,'+OPACITIES[i]+')';
+    pre.style.zIndex=i;
+    wrap.appendChild(pre);
+    layerEls.push(pre);
+  }
+  var off=document.createElement('canvas');
+  off.style.display='none'; document.body.appendChild(off);
+  var img=new Image(); img.crossOrigin='anonymous';
+  img.onload=function(){
+    setTimeout(function(){
+      var col=document.getElementById('hero-visual');
+      var CW=4*0.601, CH=4*1.14;
+      var imgA=img.width/img.height;
+      var ROWS=Math.round(col.clientHeight*0.94/CH);
+      var COLS=Math.round(ROWS*imgA*(CH/CW));
+      var maxC=Math.round(col.clientWidth*0.94/CW);
+      if(COLS>maxC){COLS=maxC;ROWS=Math.round(COLS/imgA*(CW/CH));}
+      off.width=COLS; off.height=ROWS;
+      var ctx=off.getContext('2d');
+      ctx.drawImage(img,0,0,COLS,ROWS);
+      var data=ctx.getImageData(0,0,COLS,ROWS).data;
+      var raw=[];
+      for(var i=0;i<data.length;i+=4){
+        var r=data[i],g=data[i+1],b=data[i+2],a=data[i+3];
+        if(a<30||(r>240&&g>240&&b>240)){raw.push(-1);continue;}
+        var lum=(0.299*r+0.587*g+0.114*b)/255;
+        var lv=1-lum;
+        raw.push(lv<0.04?-1:Math.pow(lv,0.85));
+      }
+      var valid=raw.filter(function(v){return v>=0;}).sort(function(a,b){return a-b;});
+      var lo=valid[Math.floor(valid.length*0.005)];
+      var hi=valid[Math.floor(valid.length*0.995)];
+      var norm=raw.map(function(v){return v<0?-1:Math.max(0,Math.min(1,(v-lo)/(hi-lo)));});
+      var bw=1/NUM_LAYERS;
+      for(var li=0;li<NUM_LAYERS;li++){
+        var mn=li*bw,mx=mn+bw+0.012,out='';
+        for(var row=0;row<ROWS;row++){
+          for(var c=0;c<COLS;c++){
+            var d=norm[row*COLS+c];
+            out+=(d>=0&&d>=mn&&d<mx)?RAMP[Math.min(Math.floor(d*R),R-1)]:' ';
+          }
+          out+='\n';
+        }
+        layerEls[li].textContent=out;
+      }
+      var tx=0,ty=0,cx=0,cy=0;
+      window.addEventListener('mousemove',function(e){
+        tx=(e.clientX/window.innerWidth-0.5)*2;
+        ty=(e.clientY/window.innerHeight-0.5)*2;
+      });
+      (function tick(){
+        cx+=(tx-cx)*0.055; cy+=(ty-cy)*0.055;
+        wrap.style.transform='perspective(1000px) rotateY('+(cx*8)+'deg) rotateX('+(-cy*5)+'deg)';
+        for(var i=0;i<NUM_LAYERS;i++)
+          layerEls[i].style.transform='translate('+(cx*-PX[i]*0.7)+'px,'+(cy*-PY[i]*0.7)+'px)';
+        requestAnimationFrame(tick);
+      })();
+    },100);
+  };
+  img.src='../images/chess.webp';
+})();
+</script>
+</body>
+</html>

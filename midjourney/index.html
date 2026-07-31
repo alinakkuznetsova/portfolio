@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>From Hand to Algorithm — Alina Kuznetsova</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0906;--ink:#ede8df;--muted:rgba(237,232,223,0.62);
+  --faint:rgba(237,232,223,0.09);--warm:#c8b99a;--silver:#c4c4c8;
+  --sans:'Syne',sans-serif;--mono:'Courier New',monospace;
+}
+html,body{width:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.018) 2px,rgba(0,0,0,0.018) 3px);pointer-events:none;z-index:9999}
+
+a.back{position:fixed;top:32px;left:48px;z-index:100;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.2s}
+a.back::before{content:"";width:20px;height:1px;background:currentColor}
+a.back:hover{color:var(--ink)}
+
+#hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;align-items:center;position:relative;overflow:hidden}
+#hero-visual{position:relative;height:100vh;display:flex;align-items:center;justify-content:center}
+#skull-wrap{position:relative;will-change:transform}
+.ascii-layer{position:absolute;top:0;left:0;white-space:pre;font-family:'Courier New',monospace;font-size:4px;line-height:1.14;letter-spacing:0.02em;pointer-events:none;will-change:transform}
+.ascii-layer:first-child{position:relative}
+
+#hero-info{padding:0 72px 0 24px}
+.eyebrow{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+#hero-info h1{font-size:clamp(36px,4.5vw,64px);font-weight:700;line-height:1.0;letter-spacing:-0.02em;margin-bottom:8px}
+#hero-info h1 em{font-style:normal;color:var(--warm)}
+.hero-sub{font-size:clamp(13px,1.2vw,16px);color:var(--muted);max-width:440px;line-height:1.85;margin:28px 0 40px}
+.hero-meta{display:flex;flex-direction:column;gap:16px}
+.hero-meta-item{display:flex;gap:14px;align-items:baseline}
+.hero-meta-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);width:90px;flex-shrink:0}
+.hero-meta-value{font-size:12px;color:var(--ink);font-weight:600}
+
+.section{padding:120px 72px;border-top:1px solid var(--faint);max-width:1400px;margin:0 auto}
+.section-label{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.section h2{font-size:clamp(24px,2.8vw,38px);font-weight:700;letter-spacing:-0.01em;line-height:1.2;margin-bottom:32px;max-width:760px}
+.section h2 em{font-style:italic;color:var(--warm);font-weight:600}
+.section-body{font-size:15px;line-height:1.9;color:var(--muted);max-width:680px}
+.section-body p{margin-bottom:20px}
+.section-body p:last-child{margin-bottom:0}
+.section-body.wide{max-width:920px}
+
+/* PAINTING REFERENCE - image with ASCII frame left, concept text right, aligned tops */
+.painting-block{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px;align-items:start}
+.ascii-frame-wrap{position:relative;display:inline-block;margin-bottom:24px;padding:54px}
+.ascii-frame-wrap img.painting-photo{position:relative;z-index:1;display:block;width:380px;max-width:100%}
+.ascii-frame-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.painting-caption{font-size:11px;color:var(--muted);text-align:center}
+.painting-caption strong{color:var(--ink);font-style:italic;font-weight:500;display:block;margin-bottom:4px;font-size:13px}
+.painting-why-label{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-top:32px}
+.painting-concept-label{font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.painting-why h3{font-size:clamp(26px,2.8vw,38px);font-weight:800;line-height:1.15;letter-spacing:-0.01em;margin-bottom:32px}
+.painting-why h3 em{font-style:italic;color:var(--warm);font-weight:600}
+
+/* PRODUCT CARDS */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:60px}
+.product-card{cursor:pointer}
+.product-img-wrap{position:relative;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--faint);background:rgba(237,232,223,0.02)}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform 0.5s ease}
+.product-card:hover .product-img-wrap img{transform:scale(1.04)}
+.product-overlay{position:absolute;inset:0;background:rgba(10,9,6,0.5);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center}
+.product-card:hover .product-overlay{opacity:1}
+.product-overlay span{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink)}
+.product-name{margin-top:18px;font-size:17px;font-weight:700}
+.product-desc{margin-top:10px;font-size:12.5px;line-height:1.8;color:var(--muted)}
+.prompt-box{margin-top:16px;border-left:2px solid var(--faint);padding-left:14px}
+.prompt-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:6px}
+.prompt-text{font-family:var(--mono);font-size:10.5px;line-height:1.7;color:var(--muted);font-style:italic}
+.prompt-params{font-family:var(--mono);font-size:10.5px;color:var(--warm);margin-top:4px;display:block}
+
+/* INSIGHTS */
+.insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:64px 80px;margin-top:80px;max-width:1100px}
+.insight-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:16px}
+.insight-item h4{font-size:26px;font-weight:700;margin-bottom:18px;letter-spacing:-0.01em}
+.insight-item p{font-size:14px;line-height:1.9;color:var(--muted);max-width:440px}
+
+.proj-footer{padding:100px 72px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.proj-footer a{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.proj-footer a:hover{color:var(--ink)}
+
+/* ITERATION DETAIL OVERLAY */
+#detail-view{
+  position:fixed;inset:0;background:var(--bg);
+  opacity:0;pointer-events:none;transform:translateY(24px);
+  transition:opacity 0.45s ease,transform 0.45s ease;
+  display:flex;flex-direction:column;z-index:200;
+}
+#detail-view.visible{opacity:1;pointer-events:all;transform:none}
+.detail-header{padding:28px 56px;border-bottom:1px solid var(--faint);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.detail-back{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);cursor:pointer;border:none;background:none;display:flex;align-items:center;gap:10px;transition:gap 0.2s}
+.detail-back::before{content:"";width:18px;height:1px;background:currentColor}
+.detail-back:hover{gap:16px}
+.detail-title-area{text-align:center}
+.detail-title{font-size:clamp(18px,2vw,26px);font-weight:700}
+.detail-sub{font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.detail-meta{font-size:9px;letter-spacing:0.1em;color:var(--muted);text-align:right}
+
+.detail-track{flex:1;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;min-height:0}
+.detail-track::-webkit-scrollbar{display:none}
+
+.iter-card{flex-shrink:0;width:100vw;height:100%;scroll-snap-align:start;display:grid;grid-template-columns:1fr 1fr}
+.iter-image-side{position:relative;overflow:hidden;background:rgba(237,232,223,0.02);display:flex;align-items:center;justify-content:center;border-right:1px solid var(--faint)}
+.iter-image-side img{max-height:90%;max-width:90%;object-fit:contain;display:block}
+.iter-badge{position:absolute;top:24px;left:24px;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;padding:6px 14px;background:var(--ink);color:var(--bg)}
+.iter-badge.accent{background:var(--warm)}
+.iter-badge.gold{background:#d4a017;color:var(--bg)}
+
+.iter-text-side{padding:56px 64px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+.iter-text-inner{max-width:480px}
+.iter-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:block}
+.iter-heading{font-size:clamp(22px,2.6vw,32px);font-weight:700;line-height:1.2;margin-bottom:20px}
+.iter-heading em{font-style:normal;color:var(--warm)}
+.iter-body{font-size:13px;line-height:1.9;color:var(--muted);margin-bottom:24px}
+.iter-prompt-block{background:rgba(237,232,223,0.03);border-left:2px solid var(--faint);padding:14px 18px;margin-bottom:20px}
+.iter-prompt-label{font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);margin-bottom:8px}
+.iter-prompt-text{font-family:var(--mono);font-size:10.5px;line-height:1.75;color:var(--muted);font-style:italic;display:block;margin-bottom:6px}
+.iter-prompt-params{font-family:var(--mono);font-size:10.5px;color:var(--warm);display:block}
+.iter-tags{display:flex;flex-wrap:wrap;gap:8px}
+.iter-tag{font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--faint);color:var(--muted)}
+.iter-tag.bad{border-color:rgba(220,90,70,0.35);color:rgba(220,120,100,0.85)}
+.iter-tag.good{border-color:var(--warm);color:var(--warm)}
+
+.progress-bar{flex-shrink:0;padding:14px 56px;display:flex;align-items:center;gap:10px;border-top:1px solid var(--faint)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--faint);transition:background 0.25s,transform 0.25s;cursor:pointer}
+.dot.active{background:var(--warm);transform:scale(1.5)}
+.nav-hint{margin-left:auto;font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)}
+
+.view-process-btn{
+  margin-top:18px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--warm);background:none;border:1px solid var(--warm);
+  padding:10px 20px;cursor:pointer;transition:background 0.2s,color 0.2s;
+}
+.view-process-btn:hover{background:var(--warm);color:var(--bg)}
+
+@media (max-width:900px){
+  #hero{grid-template-columns:1fr}
+  #hero-visual{height:55vh}
+  #hero-info{padding:48px 32px}
+  .painting-block,.product-grid{grid-template-columns:1fr}
+  .section{padding-left:32px;padding-right:32px}
+  .iter-card{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .iter-image-side{border-right:none;border-bottom:1px solid var(--faint);height:45vh}
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html#midjourney">Back to portfolio</a>
+
+<section id="hero">
+  <div id="hero-visual">
+    <div id="skull-wrap"></div>
+  </div>
+  <div id="hero-info">
+    <div class="eyebrow">Project 04 / 05 &middot; Personal Project 2026</div>
+    <h1>From Hand<br>to <em>Algorithm</em></h1>
+    <p class="hero-sub">Using an oil skull painting as the foundation, exploring what survives when your own work is handed to a generative algorithm — and what it becomes.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Medium</span><span class="hero-meta-value">Fine Art &times; AI Product Design</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Tool</span><span class="hero-meta-value">Midjourney V7</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Outputs</span><span class="hero-meta-value">2 Product Concepts</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Concept</div>
+  <h2>Rather than prompting from scratch, I wanted to see what happened if I included <em>my own work</em> in the process.</h2>
+  <div class="section-body wide">
+    <p>Having developed a personal passion for both fine art and, more recently, generative image-making, I became curious whether I could find ways in which to combine the two. Rather than prompting from scratch, I wanted to see what would happen if I included a painting of my own in the process - using a skull I'd painted in oil as the foundation, and asking Midjourney to translate its texture, anatomy, and mood into real, tangible objects. Getting to these two final products took many failed attempts, prompt adjustments, and the occasional happy accident.</p>
+  </div>
+
+  <div class="painting-block">
+    <div>
+      <div class="ascii-frame-wrap">
+        <canvas class="ascii-frame-canvas" id="frame-canvas"></canvas>
+        <img class="painting-photo" src="images/painting.jpg" alt="Original skull painting"/>
+      </div>
+      <div class="painting-caption" style="text-align:center;width:100%">
+        <strong>Skull Study</strong>
+        Alina Kuznetsova (me) — Oil on canvas, 2024
+      </div>
+    </div>
+    <div class="painting-why">
+      <h3>Why combine <em>the two mediums?</em></h3>
+      <div class="section-body">
+        <p>The idea was that by grounding the AI in a painting I'd actually made, something of its character might carry over: the weight of the brushwork, the texture of the paint surface, the particular anatomy of the skull I'd spent time studying and rendering.</p>
+        <p>I chose this painting specifically because it felt like a strong visual foundation for product design. The skull form naturally suggests vessel-like objects, and the monochrome palette felt transferable to materials like chrome and ceramic. I wanted to see how much of what I'd put into the painting could survive being handed to an algorithm and translated into something entirely different — but still inspired by it.</p>
+        <p>I wasn't interested in generating something from nothing. I wanted to use AI as an additional tool — a way to take something I'd already made and explore what else it could become, while keeping my own work at the centre of it.</p>
+        <p>I had been actively learning Midjourney through taking courses, and this project became a way to test what I'd learned, and to push it somewhere more personal than a standard prompt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Translated Into Product</div>
+  <div class="product-grid">
+
+    <div class="product-card" onclick="openDetail('candle')">
+      <div class="product-img-wrap">
+        <img src="images/candle.png" alt="Chrome Skull Candle Holder" style="object-position:center center"/>
+        <div class="product-overlay"><span>View Process</span></div>
+      </div>
+      <div class="product-name">Chrome Skull Candle Holder</div>
+      <p class="product-desc">The final result maintains the skull's anatomy from the original painting — the cranial dome, deep eye sockets and jaw structure all carry through. The chrome surface picks up a subtle paint-like texture rather than reading as perfectly smooth, echoing the deliberate marks of the brushwork.</p>
+      <div class="prompt-box">
+        <div class="prompt-label">Final Prompt</div>
+        <span class="prompt-text">hyperrealistic chrome skull candle holder, top of skull removed with white wax candle inside with wick, slight overhead, front-on angle, professional studio product lighting, plain white background, commercial product photography, shot on 85mm lens</span>
+        <span class="prompt-params">--chaos 5 --raw --stylize 50 --iw 0.7</span>
+      </div>
+      <button class="view-process-btn" onclick="event.stopPropagation();openDetail('candle')">View 5 Iterations</button>
+    </div>
+
+    <div class="product-card" onclick="openDetail('vase')">
+      <div class="product-img-wrap">
+        <img src="images/vase.png" alt="Ceramic Skull Vase"/>
+        <div class="product-overlay"><span>View Process</span></div>
+      </div>
+      <div class="product-name">Ceramic Skull Vase</div>
+      <p class="product-desc">The ceramic form closely follows the skull's anatomy as painted — the proportions, the eye cavities, the organic irregularity of the bone structure. The matte glaze retains a slight roughness that nods to the texture of the original brushwork, rather than a glossy finish.</p>
+      <div class="prompt-box">
+        <div class="prompt-label">Final Prompt</div>
+        <span class="prompt-text">ceramic skull vase, dried wildflowers and botanicals emerging from open cranium, dusty rose, ivory, sage, muted neutral tones, warm sandy beige background, dramatic natural side lighting, long soft shadow cast on wall, editorial product photography</span>
+        <span class="prompt-params">--raw --sw 50 --iw 0.5</span>
+      </div>
+      <button class="view-process-btn" onclick="event.stopPropagation();openDetail('vase')">View 4 Iterations</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Process</div>
+  <h2>Key Insights</h2>
+  <div class="insight-grid">
+    <div class="insight-item">
+      <div class="insight-num">01 - Prompting</div>
+      <h4>Sometimes less is more</h4>
+      <p>Overcomplicating prompts often confused the algorithm, producing unexpected or unwanted results. Simpler, clearer language consistently performed better.</p>
+    </div>
+    <div class="insight-item">
+      <div class="insight-num">02 - Image weight</div>
+      <h4>Getting the balance right</h4>
+      <p>Getting --iw right was critical. Too high and the output didn't read as a product; too low and the texture and anatomy were lost entirely. Finding the right balance was key to translating my work into a product.</p>
+    </div>
+    <div class="insight-item">
+      <div class="insight-num">03 - Reference images</div>
+      <h4>A dramatic impact on the result</h4>
+      <p>The style reference image had a dramatic impact on the result. The wrong reference could push the output into completely abstract territory, while the right one brought it much closer to the desired feel.</p>
+    </div>
+    <div class="insight-item">
+      <div class="insight-num">04 - Experimentation</div>
+      <h4>Patience and a willingness to try</h4>
+      <p>Getting to the final results took many more iterations than documented here. Patience and a willingness to experiment was as important as any prompt technique.</p>
+    </div>
+  </div>
+</section>
+
+<div id="detail-view">
+  <div class="detail-header">
+    <button class="detail-back" onclick="closeDetail()">Back to exhibition</button>
+    <div class="detail-title-area">
+      <h2 class="detail-title" id="detail-title"></h2>
+      <p class="detail-sub">Behind the scenes — iteration process</p>
+    </div>
+    <div class="detail-meta" id="detail-meta"></div>
+  </div>
+  <div class="detail-track" id="detail-track"></div>
+  <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+<div class="proj-footer">
+  <a href="../index.html#midjourney">&larr; Back to portfolio</a>
+  <a href="../parure/index.html">Next: Parure London &rarr;</a>
+</div>
+
+<canvas id="cv" style="display:none"></canvas>
+<script>
+(function() {
+  var NUM_LAYERS = 10;
+  var RAMP = " .-_,:;~=+<>[]{}()|/tfjrxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
+  var R = RAMP.length;
+  var OPACITIES = [0.14,0.22,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0];
+  var PX = [0.4,0.9,1.6,2.5,3.6,5.0,6.6,8.4,10.5,13.0];
+  var PY = [0.3,0.6,1.1,1.7,2.4,3.3,4.4,5.6,7.0,8.8];
+  var IMG_ASPECT = 1414/2000;
+
+  var wrap = document.getElementById('skull-wrap');
+  var layerEls = [];
+  for (var i=0;i<NUM_LAYERS;i++) {
+    var pre=document.createElement('pre');
+    pre.className='ascii-layer';
+    pre.style.color='rgba(237,232,223,'+OPACITIES[i]+')';
+    pre.style.zIndex=i;
+    wrap.appendChild(pre);
+    layerEls.push(pre);
+  }
+
+  var off=document.createElement('canvas');
+  off.style.display='none'; document.body.appendChild(off);
+  var img=new Image();
+  img.crossOrigin='anonymous';
+  img.onload=function(){
+    setTimeout(function(){
+      var col=document.getElementById('hero-visual');
+      var CW=4*0.601, CH=4*1.14;
+      var ROWS=Math.round(col.clientHeight*0.94/CH);
+      var COLS=Math.round(ROWS*IMG_ASPECT*(CH/CW));
+      var maxC=Math.round(col.clientWidth*0.94/CW);
+      if(COLS>maxC){COLS=maxC;ROWS=Math.round(COLS/IMG_ASPECT*(CW/CH));}
+      off.width=COLS; off.height=ROWS;
+      var ctx=off.getContext('2d');
+      ctx.drawImage(img,0,0,COLS,ROWS);
+      var data=ctx.getImageData(0,0,COLS,ROWS).data;
+      var raw=[];
+      for(var i=0;i<data.length;i+=4){
+        var r=data[i],g=data[i+1],b=data[i+2],a=data[i+3];
+        if(a<30||(r>240&&g>240&&b>240)){raw.push(-1);continue;}
+        var lum=(0.299*r+0.587*g+0.114*b)/255;
+        var lv=1-lum;
+        raw.push(lv<0.04?-1:Math.pow(lv,0.85));
+      }
+      var valid=raw.filter(function(v){return v>=0;}).sort(function(a,b){return a-b;});
+      var lo=valid[Math.floor(valid.length*0.005)];
+      var hi=valid[Math.floor(valid.length*0.995)];
+      var norm=raw.map(function(v){return v<0?-1:Math.max(0,Math.min(1,(v-lo)/(hi-lo)));});
+      var bw=1/NUM_LAYERS;
+      for(var li=0;li<NUM_LAYERS;li++){
+        var mn=li*bw, mx=mn+bw+0.012, out='';
+        for(var row=0;row<ROWS;row++){
+          for(var c=0;c<COLS;c++){
+            var d=norm[row*COLS+c];
+            out+=(d>=0&&d>=mn&&d<mx)?RAMP[Math.min(Math.floor(d*R),R-1)]:' ';
+          }
+          out+='\n';
+        }
+        layerEls[li].textContent=out;
+      }
+      initParallax();
+    },100);
+  };
+  img.src='../images/skull.webp';
+
+  function initParallax(){
+    var tx=0,ty=0,cx=0,cy=0;
+    window.addEventListener('mousemove',function(e){
+      tx=(e.clientX/window.innerWidth-0.5)*2;
+      ty=(e.clientY/window.innerHeight-0.5)*2;
+    });
+    (function tick(){
+      cx+=(tx-cx)*0.055; cy+=(ty-cy)*0.055;
+      wrap.style.transform='perspective(1000px) rotateY('+(cx*8)+'deg) rotateX('+(-cy*5)+'deg)';
+      for(var i=0;i<NUM_LAYERS;i++)
+        layerEls[i].style.transform='translate('+(cx*-PX[i]*0.6)+'px,'+(cy*-PY[i]*0.6)+'px)';
+      requestAnimationFrame(tick);
+    })();
+  }
+})();
+
+/* ── ASCII PICTURE FRAME ── */
+(function() {
+  var FRAME_RAMP = " .-,:;=+<>[]{}|/tfjxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
+  var FR = FRAME_RAMP.length;
+  var canvas = document.getElementById('frame-canvas');
+  if (!canvas) return;
+  var wrap = document.querySelector('.ascii-frame-wrap');
+
+  var off = document.createElement('canvas');
+  off.style.display = 'none';
+  document.body.appendChild(off);
+
+  var img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    setTimeout(function() {
+      var dW = wrap.offsetWidth;
+      var dH = wrap.offsetHeight;
+
+      var cols = 80;
+      var rows = Math.round(cols * (dH/dW));
+      off.width = cols; off.height = rows;
+      var ctx = off.getContext('2d');
+      ctx.drawImage(img, 0, 0, cols, rows);
+      var data = ctx.getImageData(0, 0, cols, rows).data;
+
+      canvas.width = dW; canvas.height = dH;
+      var CW = dW / cols, CH = dH / rows;
+      var dCtx = canvas.getContext('2d');
+      dCtx.font = (CW*1.5) + 'px Courier New';
+      dCtx.textBaseline = 'top';
+
+      var lums = [];
+      for (var i = 0; i < data.length; i += 4) {
+        if (data[i+3] >= 30) lums.push((0.299*data[i]+0.587*data[i+1]+0.114*data[i+2])/255);
+      }
+      lums.sort(function(a,b){return a-b;});
+      var lo = lums[Math.floor(lums.length*0.02)] || 0;
+      var hi = lums[Math.floor(lums.length*0.98)] || 1;
+
+      for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < cols; col++) {
+          var i = (row*cols+col)*4;
+          var r=data[i], g=data[i+1], b=data[i+2], a=data[i+3];
+          if (a < 30) continue;
+          var lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+          lum = Math.max(0, Math.min(1, (lum-lo)/(hi-lo)));
+          var density = Math.pow(1-lum, 0.7);
+          if (density < 0.03) continue;
+          var ch = FRAME_RAMP[Math.min(Math.floor(density*FR), FR-1)];
+          if (ch === ' ') continue;
+          var gv = Math.round(140 + density*100);
+          dCtx.fillStyle = 'rgba(' + gv + ',' + Math.round(gv*0.80) + ',' + Math.round(gv*0.40) + ',' + (0.55+density*0.45) + ')';
+          dCtx.fillText(ch, col*CW, row*CH);
+        }
+      }
+    }, 50);
+  };
+  img.src = 'images/frame.webp';
+})();
+
+/* ── ITERATION DATA & DETAIL VIEW ── */
+var iterData = {
+  candle: {
+    title: 'Chrome Skull Candle Holder',
+    meta: 'Product I',
+    steps: [
+      {
+        img: 'images/candle-too-smooth.png',
+        badge: 'Example 01', badgeClass: '',
+        heading: 'No reference,<br><em>no character</em>',
+        body: "To see what the algorithm would produce on its own, I tried prompting without my reference painting image. The candle came out far too smooth, with no texture and a very generic skull anatomy. This immediately showed me why including my own painting as a reference would be so important.",
+        prompt: 'hyperrealistic chrome skull candle holder, top of skull removed with white wax candle inside with lit wick, slight overhead, front-on angle, professional studio product lighting, plain white background, commercial product photography, shot on 85mm lens',
+        params: '--chaos 5 --raw --stylize 50',
+        tags: [{t:'No reference image',c:'bad'},{t:'Too smooth',c:'bad'},{t:'Generic anatomy',c:'bad'}]
+      },
+      {
+        img: 'images/candle-oops.png',
+        badge: 'Example 02', badgeClass: '',
+        heading: 'Texture improved,<br><em>but wax in wrong place</em>',
+        body: "Using the painting as an image reference provided the texture and anatomy I was looking for. However, in this attempt, the wax pooled into the eye cavities rather than sitting inside an open cranium - meaning the skull lost its form. The concept wasn't reading correctly.",
+        prompt: 'chrome skull candle holder, top of skull removed and placed beside base as lid, white wax candle inside with wick, slight overhead angle, professional studio product lighting, clean black seamless background, commercial product photography',
+        params: '--iw 0.8',
+        tags: [{t:'Good texture',c:'good'},{t:'Concept not reading',c:'bad'}]
+      },
+      {
+        img: 'images/candle-oops2.png',
+        badge: 'Example 03', badgeClass: '',
+        heading: 'Adjusted angle,<br><em>but wax merged with skull</em>',
+        body: "Adjusting the angle to front-on helped the overall composition, but Midjourney merged the wax with the skull material. The result looked physically impossible to manufacture, whereas I wanted to generate something makeable.",
+        prompt: 'chrome skull candle holder, top of skull removed with white wax candle inside with wick, slight overhead, front-on angle, professional studio product lighting, clean black seamless background, commercial product photography',
+        params: '--iw 0.6 --s 20',
+        tags: [{t:'Good angle',c:'good'},{t:'Not manufacturable',c:'bad'}]
+      },
+      {
+        img: 'images/candle-happy-accident.png',
+        badge: 'Happy Accident', badgeClass: 'gold',
+        heading: 'Not what I asked for,<br><em>but something special</em>',
+        body: "Also generated during my no-reference testing phase, this one came out sideways and without the chrome finish I was going for. However, I personally really liked the result — the lighting and composition turned out beautifully. I decided to showcase it here as a happy accident.",
+        prompt: 'chrome skull candle holder, top of skull removed with white wax candle inside with wick, slight overhead angle, professional studio product lighting, clean black seamless background, commercial product photography',
+        params: '--iw 0.8 --s 50',
+        tags: [{t:'Great composition',c:'good'},{t:'Wrong angle',c:'bad'},{t:'Not chrome',c:'bad'}]
+      },
+      {
+        img: 'images/candle-not-product-enough.png',
+        badge: 'Example 05', badgeClass: 'accent',
+        heading: 'Almost there,<br><em>not quite product photography</em>',
+        body: "Here I kept the prompt very simple to try and make the product appear as a real, manufacturable candle. This worked well - the skull anatomy looked correct with a good paint-like texture, and the candle read as a genuine product. However, the background didn't read as clean studio product photography, which I addressed in the final version by being more specific with the photography brief.",
+        prompt: 'hyperrealistic chrome skull candle holder. top part of skull removed and lays against the base as a lid. view from slightly from above, with lit candle wick inside.',
+        params: '--iw 0.8',
+        tags: [{t:'Anatomy correct',c:'good'},{t:'Paint texture',c:'good'},{t:'Background not product enough',c:'bad'}]
+      }
+    ]
+  },
+  vase: {
+    title: 'Ceramic Skull Vase',
+    meta: 'Product II',
+    steps: [
+      {
+        img: 'images/vase-too-smooth.png',
+        badge: 'Example 01', badgeClass: '',
+        heading: 'No reference,<br><em>no texture or character</em>',
+        body: "I tested what the idea would look like without a reference image. The flowers were correctly emerging from inside like a vase, which was a good start. However, it was too glossy with no paint texture showing, meaning it didn't resemble my painting at all.",
+        prompt: 'hyperrealistic ceramic porcelain vase that is facing forward towards the front, inspired by human skull, flowers sticking out the top like a vase, studio product photography, soft shadow, white background',
+        params: '--raw',
+        tags: [{t:'Good vase shape',c:'good'},{t:'Studio photography',c:'good'},{t:'Too glossy',c:'bad'},{t:'No paint texture',c:'bad'}]
+      },
+      {
+        img: 'images/vase-too-paint.png',
+        badge: 'Example 02', badgeClass: '',
+        heading: 'Accidentally set my painting<br><em>as both image and style reference</em>',
+        body: "I accidentally uploaded my painting to both the image prompt slot and the style reference slot, which resulted in the generated image looking like an actual painting rather than a vase. This mistake illustrated the importance of having correct inputs - even if the prompt seems correct, the references can override everything and completely change the output.",
+        prompt: 'hyperrealistic ceramic porcelain skull-shaped vase, fresh flowers blooming out of the top in muted neutral tones, dusty rose, ivory, sage green, dried botanicals, smooth matte glaze on skull surface with subtle painterly bone texture',
+        params: '--no paint texture background canvas --raw --sw 350 --iw 1.5',
+        tags: [{t:'Output = painting',c:'bad'}]
+      },
+      {
+        img: 'images/vase-oops.png',
+        badge: 'Example 03', badgeClass: '',
+        heading: 'Not quite<br><em>a vase!</em>',
+        body: "Here I used a fairly simple prompt to understand what needed changing. The result did not create a vase at all, but rather stuck the flowers into the ceramic material from the outside. The ceramic material did however have a fairly similar anatomy to my painting and some paint-like texture - progress, but the product logic wasn't there.",
+        prompt: 'hyperrealistic ceramic skull vase. top of skull removed with flowers coming out of it. front on angle, professional studio product lighting.',
+        params: '--raw --iw 0.9',
+        tags: [{t:'Some anatomy',c:'good'},{t:'Not reading as vase',c:'bad'}]
+      },
+      {
+        img: 'images/vase-wrong-ref2.png',
+        badge: 'Example 04', badgeClass: 'accent',
+        heading: 'Style reference introduced,<br><em>unexpected outcome</em>',
+        body: "Here I introduced a style reference image, hoping it would help the algorithm understand the vase form better. However, the particular reference I chose produced a very abstract, sculptural result. While I actually quite like the unique outcome, it completely failed to resemble my painting in terms of anatomy and texture - showing just how dramatically the choice of style reference can shift the output.",
+        prompt: 'ceramic skull vase, dried wildflowers and botanicals emerging from open cranium, dusty rose, ivory, sage, muted neutral tones, warm sandy beige background, dramatic natural side lighting',
+        params: '--no grey background --raw --sw 200 --iw 0.5',
+        tags: [{t:'Interesting result',c:''},{t:'No anatomy resemblance',c:'bad'}]
+      }
+    ]
+  }
+};
+
+var currentProduct = null;
+
+function openDetail(product) {
+  currentProduct = product;
+  document.body.style.overflow = 'hidden';
+  var d = iterData[product];
+  document.getElementById('detail-title').textContent = d.title;
+  document.getElementById('detail-meta').textContent = d.meta;
+
+  var track = document.getElementById('detail-track');
+  track.innerHTML = '';
+  d.steps.forEach(function(s, i) {
+    var card = document.createElement('div');
+    card.className = 'iter-card';
+    card.innerHTML =
+      '<div class="iter-image-side">' +
+        '<img src="' + s.img + '" alt="' + s.badge + '" loading="lazy"/>' +
+        '<span class="iter-badge ' + s.badgeClass + '">' + s.badge + '</span>' +
+      '</div>' +
+      '<div class="iter-text-side"><div class="iter-text-inner">' +
+        '<span class="iter-label">Example ' + (i+1) + '</span>' +
+        '<h3 class="iter-heading">' + s.heading + '</h3>' +
+        '<p class="iter-body">' + s.body + '</p>' +
+        '<div class="iter-prompt-block">' +
+          '<p class="iter-prompt-label">Prompt Used</p>' +
+          '<p class="iter-prompt-text">' + s.prompt + '</p>' +
+          '<p class="iter-prompt-params">' + s.params + '</p>' +
+        '</div>' +
+        '<div class="iter-tags">' + s.tags.map(function(t){return '<span class="iter-tag '+t.c+'">'+t.t+'</span>';}).join('') + '</div>' +
+      '</div></div>';
+    track.appendChild(card);
+  });
+
+  var pb = document.getElementById('progress-bar');
+  pb.innerHTML = '';
+  d.steps.forEach(function(_, i) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i===0?' active':'');
+    dot.onclick = function(){ goTo(i); };
+    pb.appendChild(dot);
+  });
+  var hint = document.createElement('span');
+  hint.className = 'nav-hint';
+  hint.textContent = 'scroll or use arrow keys';
+  pb.appendChild(hint);
+
+  track.addEventListener('scroll', onScroll, {passive:true});
+  document.getElementById('detail-view').classList.add('visible');
+  track.scrollLeft = 0;
+}
+
+function onScroll() {
+  var track = document.getElementById('detail-track');
+  var idx = Math.round(track.scrollLeft / window.innerWidth);
+  document.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+}
+
+function goTo(i) {
+  document.getElementById('detail-track').scrollTo({left: i*window.innerWidth, behavior:'smooth'});
+}
+
+function closeDetail() {
+  document.body.style.overflow = '';
+  document.getElementById('detail-view').classList.remove('visible');
+  document.getElementById('detail-track').removeEventListener('scroll', onScroll);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('detail-view').classList.contains('visible')) return;
+  var track = document.getElementById('detail-track');
+  var idx = Math.round(track.scrollLeft / window.innerWidth);
+  var total = iterData[currentProduct].steps.length;
+  if (e.key === 'ArrowRight' && idx < total-1) goTo(idx+1);
+  if (e.key === 'ArrowLeft'  && idx > 0)       goTo(idx-1);
+  if (e.key === 'Escape') closeDetail();
+});
+</script>
+</body>
+</html>
