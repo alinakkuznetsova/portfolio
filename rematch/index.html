@@ -300,10 +300,10 @@ a.back:hover{color:var(--ink)}
     </div>
     <div class="lesson-card">
       <div class="lesson-num">Problem 02</div>
-      <h3>If you add something the night before, test every variation of it</h3>
-      <p>Everything was working smoothly until the night before the first performance, when I decided to project illuminated status text onto the board announcing check and checkmate. I tested it and it seemed fine, so I included it.</p>
-      <p>What caught the bug was user testing — getting people to play multiple rounds across different board configurations. Testing enough variations revealed that when the text landed over a pawn specifically, the game froze. Pawns are the smallest piece, which makes them the most susceptible to a change in brightness: the projected text raised the square above the detection threshold, and the piece disappeared from the read. Solo testing hadn't caught it because the failure only appeared in specific positions that weren't obvious to anticipate in advance.</p>
-      <p>The fix was straightforward: make the text smaller and dimmer so it no longer overpowered the board. It was a reminder that getting something in front of users quickly is what surfaces the failures that matter.</p>
+      <h3>User testing surfaces failures you can't find alone</h3>
+      <p>I added projected status text to the board to announce check and checkmate. It seemed to work in my own testing, so I included it. The bug didn't show up because I tend to play with similar tactics -- so while I wasn't playing identically, I naturally gravitated toward certain positions and simply never happened to reach the one that caused the failure.</p>
+      <p>User testing caught it. Different people play differently, take different moves, and cover far more board variations than a single tester ever would. When a user's pawn ended up under the projected text, the light raised that square above the detection threshold and the piece disappeared from the read, causing the game to freeze.</p>
+      <p>The fix was simple: make the text smaller and dimmer. However, it highlighted the importance of user testing to explore all sorts of different variations I may not have covered myself.</p>
     </div>
   </div>
 </section>
