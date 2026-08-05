@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>ASCII Pre-renderer</title>
+<style>
+body{background:#111;color:#eee;font-family:monospace;padding:20px}
+button{background:#c8b99a;color:#000;border:none;padding:8px 16px;cursor:pointer;margin:4px;font-size:13px}
+textarea{width:100%;height:200px;background:#000;color:#0f0;font-family:monospace;font-size:11px;margin-top:8px}
+.section{margin-bottom:32px;border:1px solid #333;padding:16px}
+h2{color:#c8b99a;margin-top:0}
+.status{color:#0f0;margin:8px 0}
+</style>
+</head>
+<body>
+<h1>ASCII Pre-renderer</h1>
+<p>Put this file in your portfolio root folder (same level as index.html), open it in browser, click each button. Copy the output into your HTML.</p>
+
+<div class="section">
+  <h2>Face (portrait)</h2>
+  <button onclick="render('images/face.png', 3, 'portrait', 0.88, 'face-output')">Render Face</button>
+  <div class="status" id="face-status"></div>
+  <textarea id="face-output" placeholder="Output will appear here..."></textarea>
+</div>
+
+<div class="section">
+  <h2>Chess</h2>
+  <button onclick="render('images/chess.webp', 4, 'icon', 0.97, 'chess-output')">Render Chess</button>
+  <div class="status" id="chess-status"></div>
+  <textarea id="chess-output" placeholder="Output will appear here..."></textarea>
+</div>
+
+<div class="section">
+  <h2>Mushroom (Borderless)</h2>
+  <button onclick="render('images/mush.webp', 4, 'icon', 0.97, 'mush-output')">Render Mushroom</button>
+  <div class="status" id="mush-status"></div>
+  <textarea id="mush-output" placeholder="Output will appear here..."></textarea>
+</div>
+
+<div class="section">
+  <h2>UFO (Piblo)</h2>
+  <button onclick="render('images/ufo.webp', 3.5, 'icon', 0.55, 'ufo-output')">Render UFO</button>
+  <div class="status" id="ufo-status"></div>
+  <textarea id="ufo-output" placeholder="Output will appear here..."></textarea>
+</div>
+
+<div class="section">
+  <h2>Skull (Midjourney)</h2>
+  <button onclick="render('images/skull.webp', 4, 'icon', 0.97, 'skull-output')">Render Skull</button>
+  <div class="status" id="skull-status"></div>
+  <textarea id="skull-output" placeholder="Output will appear here..."></textarea>
+</div>
+
+<script>
+var RAMP = " .-_,:;~=+<>[]{}()|/tfjrxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
+var R = RAMP.length;
+var NUM_LAYERS = 10;
+var OPACITIES = [0.14,0.22,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0];
+
+function render(src, fontSize, mode, scale, outputId) {
+  var statusEl = document.getElementById(outputId.replace('output','status'));
+  statusEl.textContent = 'Rendering...';
+
+  var CW = fontSize * 0.601;
+  var CH = fontSize * 1.14;
+
+  var img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    var imgA = img.width / img.height;
+    var wH = window.innerHeight;
+    var wW = window.innerWidth * 0.5;
+    var ROWS = Math.round(wH * scale / CH);
+    var COLS = Math.round(ROWS * imgA * (CH / CW));
+    var maxC = Math.round(wW * 0.94 / CW);
+    if (COLS > maxC) { COLS = maxC; ROWS = Math.round(COLS / imgA * (CW / CH)); }
+
+    var off = document.createElement('canvas');
+    off.width = COLS; off.height = ROWS;
+    var ctx = off.getContext('2d');
+    ctx.drawImage(img, 0, 0, COLS, ROWS);
+    var data = ctx.getImageData(0, 0, COLS, ROWS).data;
+
+    var raw = [];
+    for (var i = 0; i < data.length; i += 4) {
+      var r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+      if (a < 30 || (r > 240 && g > 240 && b > 240)) { raw.push(-1); continue; }
+      var lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+      var lv = 1 - lum;
+      if (mode === 'portrait') {
+        raw.push(lv < 0.03 ? -1 : Math.pow(lv, 0.55));
+      } else {
+        raw.push(lv < 0.04 ? -1 : Math.pow(lv, 0.85));
+      }
+    }
+
+    var valid = raw.filter(function(v){return v>=0;}).sort(function(a,b){return a-b;});
+    var lo = valid[Math.floor(valid.length*0.005)];
+    var hi = valid[Math.floor(valid.length*0.995)];
+    var norm = raw.map(function(v){return v<0?-1:Math.max(0,Math.min(1,(v-lo)/(hi-lo)));});
+
+    var layers = [];
+    var bw = 1 / NUM_LAYERS;
+    for (var li = 0; li < NUM_LAYERS; li++) {
+      var mn = li*bw, mx = mn+bw+0.012, out = '';
+      for (var row = 0; row < ROWS; row++) {
+        for (var col = 0; col < COLS; col++) {
+          var d = norm[row*COLS+col];
+          out += (d>=0&&d>=mn&&d<mx) ? RAMP[Math.min(Math.floor(d*R),R-1)] : ' ';
+        }
+        out += '\n';
+      }
+      layers.push(out);
+    }
+
+    // Output as JSON array of layer strings
+    var result = JSON.stringify(layers);
+    document.getElementById(outputId).value = result;
+    statusEl.textContent = 'Done! ' + ROWS + ' rows x ' + COLS + ' cols. Copy the output above.';
+  };
+  img.onerror = function() { statusEl.textContent = 'Error loading image -- make sure this file is in your portfolio root folder.'; };
+  img.src = src;
+}
+</script>
+</body>
+</html>

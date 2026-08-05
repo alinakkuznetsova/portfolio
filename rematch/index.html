@@ -300,7 +300,7 @@ a.back:hover{color:var(--ink)}
     </div>
     <div class="lesson-card">
       <div class="lesson-num">Problem 02</div>
-      <h3>User testing surfaces failures you can't find alone</h3>
+      <h3>A bug invisible in solo testing</h3>
       <p>I added projected status text to the board to announce check and checkmate. It seemed to work in my own testing, so I included it. The bug didn't show up because I tend to play with similar tactics -- so while I wasn't playing identically, I naturally gravitated toward certain positions and simply never happened to reach the one that caused the failure.</p>
       <p>User testing caught it. Different people play differently, take different moves, and cover far more board variations than a single tester ever would. When a user's pawn ended up under the projected text, the light raised that square above the detection threshold and the piece disappeared from the read, causing the game to freeze.</p>
       <p>The fix was simple: make the text smaller and dimmer. However, it highlighted the importance of user testing to explore all sorts of different variations I may not have covered myself.</p>
