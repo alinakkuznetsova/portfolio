@@ -243,6 +243,7 @@ var Portfolio = (function() {
   }
 
   var particleChars = {
+    newnatures: ['NCA','seed','grow','3x3','16ch','lerp','m=0.5','cell','pool','step'],
     rematch:    ['e4','d5','Nf3','Nc6','Bb5','O-O','Re1','e5','1-0','d4'],
     borderless: ['SD','LoRA','XR','vec','rgb','uv','0,0','1,1','ctrl','px'],
     piblo:      ['zap','orb','*','>>','pluto','bleep','UFO','beep','420'],

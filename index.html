@@ -7,11 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css"/>
   <style>
-    #work-intro h2 {
+    #work-intro h2, #extra-intro h2 {
       font-size: clamp(13px, 1.4vw, 18px);
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0.02em;
+    }
+    #extra-intro {
+      padding: 0 56px 0 200px;
+    }
+    #extra-intro h2 {
+      font-family: var(--display);
+      font-weight: 300;
+      letter-spacing: 0.01em;
     }
     .ascii-layer-proj {
       position: absolute;
@@ -54,9 +62,32 @@
     </div>
   </section>
 
-  <!-- 01: THE REMATCH — icon RIGHT -->
-  <section class="project-section" id="rematch">
+  <!-- 01: NEW NATURES — icon RIGHT -->
+  <section class="project-section" id="new-natures">
     <div class="project-info text-left">
+      <h2 class="project-title">New <em>Natures</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Neural Cellular Automata</span>
+        <span class="project-tag">PyTorch</span>
+        <span class="project-tag">Next.js</span>
+        <span class="project-tag">MSc Thesis</span>
+      </div>
+      <p class="project-desc">Neural cellular automata trained on natural textures, then combined to grow new patterns that inherit from both parents. Three combination methods test whether linear mode connectivity holds for NCA, with the results realised as a gallery of works and a live combination room in the browser.</p>
+      <a class="project-link" href="new-natures/index.html">View project</a>
+    </div>
+    <div class="project-visual" id="visual-new-natures">
+      <div id="wrap-nca" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-new-natures"></canvas>
+    </div>
+  </section>
+
+  <!-- 02: THE REMATCH — icon LEFT -->
+  <section class="project-section visual-left" id="rematch">
+    <div class="project-visual" id="visual-rematch">
+      <div id="wrap-chess" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-rematch"></canvas>
+    </div>
+    <div class="project-info text-right">
       <h2 class="project-title">The <em>Rematch</em></h2>
       <div class="project-tags">
         <span class="project-tag">Computer Vision</span>
@@ -66,19 +97,11 @@
       <p class="project-desc">A projected chess interface that detects physical moves via computer vision and responds with an AI opponent in real time, making it possible to play against a machine on a real board.</p>
       <a class="project-link" href="rematch/index.html">View project</a>
     </div>
-    <div class="project-visual" id="visual-rematch">
-      <div id="wrap-chess" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-rematch"></canvas>
-    </div>
   </section>
 
-  <!-- 02: BORDERLESS — icon LEFT -->
-  <section class="project-section visual-left" id="borderless">
-    <div class="project-visual" id="visual-borderless">
-      <div id="wrap-mush" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-borderless"></canvas>
-    </div>
-    <div class="project-info text-right">
+  <!-- 03: BORDERLESS — icon RIGHT -->
+  <section class="project-section" id="borderless">
+    <div class="project-info text-left">
       <h2 class="project-title">Border<em>less</em></h2>
       <div class="project-tags">
         <span class="project-tag">Generative AI</span>
@@ -89,33 +112,38 @@
       <p class="project-desc">An interactive world built from user sketches. A LoRA and ControlNet pipeline transforms each drawing into a stylised generative asset, placed automatically into a 360 parallax environment in Three.js. Once the world is fully grown, users can step inside and explore it via VR.</p>
       <a class="project-link" href="borderless/index.html">View project</a>
     </div>
+    <div class="project-visual" id="visual-borderless">
+      <div id="wrap-mush" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-borderless"></canvas>
+    </div>
   </section>
 
-  <!-- 03: PIBLO — icon RIGHT -->
-  <section class="project-section" id="piblo">
-    <div class="project-info text-left">
-      <h2 class="project-title">Piblo the <em>Plutonian</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Conversational AI</span>
-        <span class="project-tag">LLM</span>
-        <span class="project-tag">Python</span>
-      </div>
-      <p class="project-desc">A conversational interface designed to make complex space mission data more accessible and engaging. Memory, personality, and a 10,000-record dataset retrieval system, all wrapped in the form of a virtual alien.</p>
-      <a class="project-link" href="piblo/index.html">View project</a>
-    </div>
+  <!-- 04: PIBLO — icon LEFT -->
+  <section class="project-section visual-left" id="piblo">
     <div class="project-visual" style="background:var(--bg)" id="visual-piblo">
       <div id="ufo-wrap" style="position:relative;will-change:transform;"></div>
       <canvas class="particle-canvas" id="pc-piblo"></canvas>
     </div>
+    <div class="project-info text-right">
+      <h2 class="project-title">Piblo the <em>Plutonian</em></h2>
+      <div class="project-tags">
+        <span class="project-tag">Conversational AI</span>
+        <span class="project-tag">Local LLM</span>
+        <span class="project-tag">Python</span>
+      </div>
+      <p class="project-desc">A character-driven conversational agent that turns a 10,000-record space mission dataset into dialogue. It combines persistent user memory, locally run LLM story generation and natural-language retrieval, with a persona designed around research on anthropomorphism and engagement.</p>
+      <a class="project-link" href="piblo/index.html">View project</a>
+    </div>
   </section>
 
-  <!-- 04: FROM HAND TO ALGORITHM — icon LEFT -->
-  <section class="project-section visual-left" id="midjourney">
-    <div class="project-visual" id="visual-midjourney">
-      <div id="wrap-brush" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-midjourney"></canvas>
-    </div>
-    <div class="project-info text-right">
+  <!-- EXTRA -->
+  <div id="extra-intro">
+    <h2>And something a little different.</h2>
+  </div>
+
+  <!-- 05: FROM HAND TO ALGORITHM — icon RIGHT -->
+  <section class="project-section" id="midjourney">
+    <div class="project-info text-left">
       <h2 class="project-title">From Hand<br>to <em>Algorithm</em></h2>
       <div class="project-tags">
         <span class="project-tag">Midjourney V7</span>
@@ -124,6 +152,10 @@
       </div>
       <p class="project-desc">An exploration of combining personal craft with generative AI, using an oil painting as the starting point and carefully directing the algorithm to translate it into product.</p>
       <a class="project-link" href="midjourney/index.html">View project</a>
+    </div>
+    <div class="project-visual" id="visual-midjourney">
+      <div id="wrap-brush" style="position:relative;will-change:transform;"></div>
+      <canvas class="particle-canvas" id="pc-midjourney"></canvas>
     </div>
   </section>
 
@@ -228,9 +260,10 @@
       }
     }
 
-    renderIcon('images/chess.webp', 'wrap-chess',  'visual-rematch',    'pc-rematch',    'rematch');
-    renderIcon('images/mush.webp',  'wrap-mush',   'visual-borderless', 'pc-borderless', 'borderless');
-    renderIcon('images/skull.webp', 'wrap-brush',  'visual-midjourney', 'pc-midjourney', 'midjourney');
+    renderIcon('images/nca.webp',  'wrap-nca',    'visual-new-natures', 'pc-new-natures', 'newnatures');
+    renderIcon('images/chess.webp', 'wrap-chess',  'visual-rematch',     'pc-rematch',     'rematch');
+    renderIcon('images/mush.webp',  'wrap-mush',   'visual-borderless',  'pc-borderless',  'borderless');
+    renderIcon('images/skull.webp', 'wrap-brush',  'visual-midjourney',  'pc-midjourney',  'midjourney');
 
     // ── UFO ──
     renderIcon('images/ufo.webp', 'ufo-wrap', 'visual-piblo', 'pc-piblo', 'piblo', 0.55);
