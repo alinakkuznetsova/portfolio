@@ -1,274 +1,253 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Alina Kuznetsova</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css"/>
-  <style>
-    #work-intro h2, #extra-intro h2 {
-      font-size: clamp(13px, 1.4vw, 18px);
-      font-weight: 400;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-    #extra-intro {
-      padding: 0 56px 0 200px;
-    }
-    #extra-intro h2 {
-      font-family: var(--display);
-      font-weight: 300;
-      letter-spacing: 0.01em;
-    }
-    .ascii-layer-proj {
-      position: absolute;
-      top: 0; left: 0;
-      white-space: pre;
-      font-family: 'Courier New', monospace;
-      font-size: 4px;
-      line-height: 1.14;
-      letter-spacing: 0.02em;
-      pointer-events: none;
-      will-change: transform;
-      -webkit-font-smoothing: none;
-    }
-    .ascii-layer-proj:first-child { position: relative; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alina Kuznetsova, creative technologist</title>
+  <meta name="description" content="Alina Kuznetsova is a London creative technologist who has just completed an MSc in Applied Machine Learning. Computer vision, diffusion fine-tuning, local LLMs and neural cellular automata, built end to end.">
+  <meta property="og:title" content="Alina Kuznetsova, creative technologist">
+  <meta property="og:description" content="I train models, build the systems around them, and design how people meet them.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#e6e9e3">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23002fa7'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div id="portrait-col">
-      <div class="ascii-wrap" id="wrap-handshake" style="position:relative;margin-top:2vh;"></div>
-      <canvas class="particle-canvas" id="pc-hero"></canvas>
+  <!-- masthead -->
+  <header class="masthead">
+    <div class="wrap grid">
+      <a class="label mh-name" href="index.html">Alina Kuznetsova</a>
+      <span class="label mh-mid">Creative technologist · London</span>
+      <nav class="label mh-end" aria-label="Contact">
+        <a href="mailto:alinakuznetsova7@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/alina-kuznetsova-74a386204/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
-    <div id="info-col" style="display:flex;flex-direction:column;justify-content:space-between;padding:64px 72px 72px 56px;height:100%">
-      <div class="info-top" style="display:flex;flex-direction:column;padding-top:15vh;">
-        <div id="name">Alina<span class="last">Kuznetsova</span></div>
-        <div class="h-rule"></div>
-        <div id="descriptor">
-          Technologist building at the intersection of <em>AI and creative practice</em>, from live performance systems to generative worlds.
+  </header>
+
+  <main>
+
+    <!-- hero -->
+    <section class="wrap grid hero">
+      <div class="hero-text">
+        <h1 class="h1">I train models, build the systems around them, and design how <em>people meet them.</em></h1>
+        <p class="lede">Creative technologist who has just completed an MSc in Applied Machine Learning at UAL's Creative Computing Institute. I build interactive systems end to end: training and fine-tuning the models, engineering the pipelines around them, and designing the interfaces and installations people actually use. Computer vision, generative image models and language models, built into things people can play, draw with and step inside.</p>
+      </div>
+      <figure class="fig hero-fig">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/portrait.webp" data-h="560" data-fs="3" data-mode="portrait" role="img" aria-label="Portrait of Alina Kuznetsova drawn in layered ASCII characters"></div>
         </div>
-        <nav id="hero-links">
-          <a href="mailto:alinakuznetsova7@gmail.com">Email — alinakuznetsova7@gmail.com</a>
-          <a href="https://www.linkedin.com/in/alina-kuznetsova-74a386204/" target="_blank">LinkedIn — alinakkuznetsova</a>
-        </nav>
-      </div>
-      <div id="work-intro">
-        <h2>What I've built recently.</h2>
-      </div>
-    </div>
-  </section>
+        <figcaption class="fig-cap caption"><span><b>Fig. 1</b> The author, in ten layers of ASCII</span></figcaption>
+      </figure>
+    </section>
 
-  <!-- 01: NEW NATURES — icon RIGHT -->
-  <section class="project-section" id="new-natures">
-    <div class="project-info text-left">
-      <h2 class="project-title">New <em>Natures</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Neural Cellular Automata</span>
-        <span class="project-tag">PyTorch</span>
-        <span class="project-tag">Next.js</span>
-        <span class="project-tag">MSc Thesis</span>
-      </div>
-      <p class="project-desc">Neural cellular automata trained on natural textures, then combined to grow new patterns that inherit from both parents. Three combination methods test whether linear mode connectivity holds for NCA, with the results realised as a gallery of works and a live combination room in the browser.</p>
-      <a class="project-link" href="new-natures/index.html">View project</a>
-    </div>
-    <div class="project-visual" id="visual-new-natures">
-      <div id="wrap-nca" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-new-natures"></canvas>
-    </div>
-  </section>
+    <!-- contents -->
+    <nav class="wrap grid contents" aria-label="Projects">
+      <span class="label">Selected work</span>
+      <ol>
+        <li><a href="#new-natures"><span class="label">I</span><span>New Natures</span><span class="label">MSc thesis · Neural cellular automata</span></a></li>
+        <li><a href="#rematch"><span class="label">II</span><span>The Rematch</span><span class="label">Computer vision · Projection</span></a></li>
+        <li><a href="#borderless"><span class="label">III</span><span>Borderless</span><span class="label">Diffusion fine-tuning · VR</span></a></li>
+        <li><a href="#piblo"><span class="label">IV</span><span>Piblo the Plutonian</span><span class="label">Conversational AI · Local LLM</span></a></li>
+        <li class="aside"><a href="#midjourney"><span class="label">App.</span><span>From Hand to Algorithm</span><span class="label">Generative image direction</span></a></li>
+      </ol>
+    </nav>
 
-  <!-- 02: THE REMATCH — icon LEFT -->
-  <section class="project-section visual-left" id="rematch">
-    <div class="project-visual" id="visual-rematch">
-      <div id="wrap-chess" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-rematch"></canvas>
-    </div>
-    <div class="project-info text-right">
-      <h2 class="project-title">The <em>Rematch</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Computer Vision</span>
-        <span class="project-tag">Python</span>
-        <span class="project-tag">Physical Computing</span>
+    <!-- plate i: new natures -->
+    <article class="wrap grid plate plate--lead" id="new-natures">
+      <div class="plate-meta">
+        <span class="numeral">I.</span>
+        <dl class="meta">
+          <div><dt>Type</dt><dd>MSc thesis, 2026</dd></div>
+          <div><dt>Field</dt><dd>Neural cellular automata, weight-space interpolation</dd></div>
+          <div><dt>Built with</dt><dd>PyTorch, Next.js, WebGL</dd></div>
+          <div><dt>Live</dt><dd><a href="https://new-natures.vercel.app/" target="_blank" rel="noopener">new-natures.vercel.app</a></dd></div>
+        </dl>
       </div>
-      <p class="project-desc">A projected chess interface that detects physical moves via computer vision and responds with an AI opponent in real time, making it possible to play against a machine on a real board.</p>
-      <a class="project-link" href="rematch/index.html">View project</a>
-    </div>
-  </section>
-
-  <!-- 03: BORDERLESS — icon RIGHT -->
-  <section class="project-section" id="borderless">
-    <div class="project-info text-left">
-      <h2 class="project-title">Border<em>less</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Generative AI</span>
-        <span class="project-tag">Stable Diffusion</span>
-        <span class="project-tag">WebXR</span>
-        <span class="project-tag">Group Project</span>
+      <figure class="fig plate-art">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/nca.webp" data-h="400" data-fs="3" role="img" aria-label="A nautilus shell cross-section drawn in layered ASCII"></div>
+        </div>
+        <figcaption class="fig-cap caption"><span><b>Fig. 2</b> Nautilus: a pattern grown by nature</span></figcaption>
+      </figure>
+      <div class="plate-body">
+        <h2 class="plate-title">New Natures</h2>
+        <div class="prose">
+          <p>A comparative study of three ways to combine neural cellular automata trained on natural textures, testing whether linear mode connectivity, a property studied on image classifiers, holds for models that grow their output.</p>
+          <p>The combinations that held became a series of pattern designs, and the best of them run live in an interactive exhibition in the browser.</p>
+        </div>
+        <div class="links">
+          <a class="link" href="new-natures/index.html">Read the case study</a>
+          <a class="link" href="https://new-natures.vercel.app/" target="_blank" rel="noopener">Open the exhibition</a>
+        </div>
       </div>
-      <p class="project-desc">An interactive world built from user sketches. A LoRA and ControlNet pipeline transforms each drawing into a stylised generative asset, placed automatically into a 360 parallax environment in Three.js. Once the world is fully grown, users can step inside and explore it via VR.</p>
-      <a class="project-link" href="borderless/index.html">View project</a>
-    </div>
-    <div class="project-visual" id="visual-borderless">
-      <div id="wrap-mush" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-borderless"></canvas>
-    </div>
-  </section>
-
-  <!-- 04: PIBLO — icon LEFT -->
-  <section class="project-section visual-left" id="piblo">
-    <div class="project-visual" style="background:var(--bg)" id="visual-piblo">
-      <div id="ufo-wrap" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-piblo"></canvas>
-    </div>
-    <div class="project-info text-right">
-      <h2 class="project-title">Piblo the <em>Plutonian</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Conversational AI</span>
-        <span class="project-tag">Local LLM</span>
-        <span class="project-tag">Python</span>
+      <div class="plate-extra">
+        <div class="data-block">
+          <span class="caption">Coherent blends by combination method: both parents stay recognisable and the blend never collapses to noise</span>
+          <div class="data">
+            <div><b>5 / 10</b><span class="label">Method 1 · one model trained on both textures</span></div>
+            <div class="hl"><b>13 / 20</b><span class="label">Method 2 · two models fine-tuned from a shared start</span></div>
+            <div><b>0 / 10</b><span class="label">Method 3 · two models trained separately, predicted to fail</span></div>
+            <div><b>5</b><span class="label">natural textures learned</span></div>
+          </div>
+        </div>
       </div>
-      <p class="project-desc">A character-driven conversational agent that turns a 10,000-record space mission dataset into dialogue. It combines persistent user memory, locally run LLM story generation and natural-language retrieval, with a persona designed around research on anthropomorphism and engagement.</p>
-      <a class="project-link" href="piblo/index.html">View project</a>
-    </div>
-  </section>
+    </article>
 
-  <!-- EXTRA -->
-  <div id="extra-intro">
-    <h2>And something a little different.</h2>
-  </div>
-
-  <!-- 05: FROM HAND TO ALGORITHM — icon RIGHT -->
-  <section class="project-section" id="midjourney">
-    <div class="project-info text-left">
-      <h2 class="project-title">From Hand<br>to <em>Algorithm</em></h2>
-      <div class="project-tags">
-        <span class="project-tag">Midjourney V7</span>
-        <span class="project-tag">Fine Art</span>
-        <span class="project-tag">AI Product Design</span>
+    <!-- plate ii: the rematch -->
+    <article class="wrap grid plate plate--right" id="rematch">
+      <div class="plate-meta">
+        <span class="numeral">II.</span>
+        <dl class="meta">
+          <div><dt>Type</dt><dd>MSc project, 2026, graded A</dd></div>
+          <div><dt>Field</dt><dd>Computer vision, projection mapping, live performance</dd></div>
+          <div><dt>Built with</dt><dd>Python, OpenCV, python-chess, Stockfish</dd></div>
+        </dl>
       </div>
-      <p class="project-desc">An exploration of combining personal craft with generative AI, using an oil painting as the starting point and carefully directing the algorithm to translate it into product.</p>
-      <a class="project-link" href="midjourney/index.html">View project</a>
-    </div>
-    <div class="project-visual" id="visual-midjourney">
-      <div id="wrap-brush" style="position:relative;will-change:transform;"></div>
-      <canvas class="particle-canvas" id="pc-midjourney"></canvas>
-    </div>
-  </section>
+      <div class="plate-body">
+        <h2 class="plate-title">The Rematch</h2>
+        <div class="prose">
+          <p>A real chess board that plays back. An overhead camera reads my moves, Stockfish answers at 2750 Elo, Deep Blue's estimated strength in 1997, and its pieces appear on the board as projected light.</p>
+          <p>I performed it live as a restaging of Deep Blue against Kasparov. The system ran from first move to checkmate in front of an audience without interruption.</p>
+        </div>
+        <div class="links"><a class="link" href="rematch/index.html">Read the case study</a></div>
+      </div>
+      <figure class="fig plate-art">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/chess.webp" data-h="400" data-fs="3" role="img" aria-label="A chess king drawn in layered ASCII"></div>
+        </div>
+        <figcaption class="fig-cap caption"><span><b>Fig. 3</b> The king: Deep Blue v Kasparov, restaged</span></figcaption>
+      </figure>
+      <div class="plate-extra">
+        <div class="exhibit">
+          <span class="exhibit-big">7…h6</span>
+          <p class="caption" style="max-width:52ch">Deep Blue v Kasparov, 1997, Game 6. Kasparov's seventh move is widely seen as the error that lost the match. The Rematch starts from the position just before it, with me in his seat, and plays it differently.</p>
+        </div>
+        <div class="data">
+          <div><b>7</b><span class="label">Python modules, camera to projector</span></div>
+          <div><b>2750</b><span class="label">Elo, matched to Deep Blue</span></div>
+          <div><b>0</b><span class="label">sensors in the board: camera and projector only</span></div>
+          <div><b>1</b><span class="label">full game played live, start to checkmate</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- plate iii: borderless -->
+    <article class="wrap grid plate plate--split" id="borderless">
+      <div class="plate-meta">
+        <span class="numeral">III.</span>
+        <dl class="meta">
+          <div><dt>Type</dt><dd>MSc group project, 2026, graded A</dd></div>
+          <div><dt>My role</dt><dd>Machine learning lead: dataset, LoRA training, ControlNet, inference backend</dd></div>
+          <div><dt>Built with</dt><dd>Stable Diffusion 1.5, LoRA, ControlNet, rembg, Flask, Three.js</dd></div>
+        </dl>
+      </div>
+      <figure class="fig plate-art">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/mush.webp" data-h="380" data-fs="3" role="img" aria-label="Two mushrooms drawn in layered ASCII"></div>
+        </div>
+        <figcaption class="fig-cap caption"><span><b>Fig. 4</b> Mushrooms, a sketch category</span></figcaption>
+      </figure>
+      <div class="plate-body">
+        <h2 class="plate-title">Borderless</h2>
+        <div class="prose">
+          <p>Visitors sketch a mushroom, a planet or a cloud. A fine-tuned diffusion model repaints it in watercolour and places it in a shared 360° world that you can walk into in VR.</p>
+          <p>I owned the machine learning: a cleaned dataset of around 600 images, four LoRA fine-tunes on Stable Diffusion 1.5, each fixing a named failure in the last, ControlNet sketch conditioning tuned per category, and the backend that turns a browser drawing into a placed asset.</p>
+        </div>
+        <div class="links"><a class="link" href="borderless/index.html">Read the case study</a></div>
+      </div>
+      <div class="plate-extra">
+        <div class="data">
+          <div><b>~600</b><span class="label">training images, cleaned and captioned</span></div>
+          <div><b>4</b><span class="label">LoRA versions, each fixing the last</span></div>
+          <div><b>6</b><span class="label">sketch categories</span></div>
+          <div><b>1</b><span class="label">shared 360° world, explorable in VR</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- plate iv: piblo -->
+    <article class="wrap grid plate plate--right" id="piblo">
+      <div class="plate-meta">
+        <span class="numeral">IV.</span>
+        <dl class="meta">
+          <div><dt>Type</dt><dd>MSc module project, graded A. My first coding project</dd></div>
+          <div><dt>Field</dt><dd>Conversational AI, retrieval, character design</dd></div>
+          <div><dt>Built with</dt><dd>Python, SmolLM-135M-Instruct</dd></div>
+        </dl>
+      </div>
+      <div class="plate-body">
+        <h2 class="plate-title">Piblo the Plutonian</h2>
+        <div class="prose">
+          <p>A Plutonian who makes a 10,000-record space-mission dataset worth talking to. Piblo remembers what you tell it, writes you a story with a language model small enough to run on a laptop without a GPU, and answers questions about real missions in plain English.</p>
+          <p>Twenty people tested it. Almost all used it without help and called it fun; fewer noticed it was teaching them, which set the brief for the next version.</p>
+        </div>
+        <div class="links"><a class="link" href="piblo/index.html">Read the case study</a></div>
+      </div>
+      <figure class="fig plate-art">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/ufo.webp" data-h="360" data-fs="3" role="img" aria-label="A flying saucer with a tractor beam drawn in layered ASCII"></div>
+        </div>
+        <figcaption class="fig-cap caption"><span><b>Fig. 5</b> Piblo's ride home</span></figcaption>
+      </figure>
+      <div class="plate-extra">
+        <div class="transcript" aria-label="Excerpt from a real Piblo session">
+          <p class="bot"><span class="who">Piblo</span><span>Greetings human! I am Piblo from the planet Pluto. What do you call yourself?</span></p>
+          <p><span class="who">Sam</span><span>Sam</span></p>
+          <p class="bot"><span class="who">Piblo</span><span>…And what do you like to eat? I'm fascinated by what I've heard about earth cuisine.</span></p>
+          <p><span class="who">Sam</span><span>burgers</span></p>
+          <p class="bot"><span class="who">Piblo</span><span>Alright Sam, I must shoot off back to Pluto! Next time I visit you must make me some burgers to try.</span></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- appendix: from hand to algorithm -->
+    <article class="wrap grid appendix" id="midjourney">
+      <div class="appendix-meta"><span class="label">Appendix</span></div>
+      <figure class="fig appendix-art">
+        <div class="fig-art">
+          <div class="ascii" data-ascii="images/skull.webp" data-h="260" data-fs="2.6" role="img" aria-label="A skull drawn in layered ASCII"></div>
+        </div>
+        <figcaption class="fig-cap caption"><span><b>Fig. 6</b> Skull study</span></figcaption>
+      </figure>
+      <div class="appendix-body">
+        <h2 class="plate-title">From Hand to Algorithm</h2>
+        <div class="prose">
+          <p>One of my oil paintings, directed through Midjourney V7 into two product concepts, a chrome candle holder and a ceramic vase. The craft is in the control: balancing image weight and style references so the painting's anatomy and brushwork survive the translation.</p>
+        </div>
+        <div class="links"><a class="link" href="midjourney/index.html">See the process</a></div>
+      </div>
+    </article>
+
+    <!-- about -->
+    <section class="wrap grid about" id="about">
+      <span class="label">About</span>
+      <div class="about-body">
+        <p class="lede">I came to machine learning from a First in Social Sciences at UCL, so I start with the person using the system and work back to the model. I'm most useful where engineering, design and research overlap: prototyping the model, building the pipeline, and designing what people actually touch.</p>
+      </div>
+      <div class="caps">
+        <div><span class="label">Machine learning</span><p>PyTorch, neural cellular automata, Stable Diffusion, LoRA fine-tuning, ControlNet, ComfyUI, local LLMs, OpenCV</p></div>
+        <div><span class="label">Engineering</span><p>Python, TypeScript, JavaScript, Next.js, React Native, WebGL, Supabase, projection mapping</p></div>
+        <div><span class="label">Design</span><p>Interaction and interface design, typography and layout, prototyping in Figma, illustration in Procreate, generative image direction (Midjourney)</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- colophon -->
+  <footer class="wrap grid colophon">
+    <span class="label">Colophon</span>
+    <p>For me, visual design and engineering aren't separate skills but a balance, and the work is best when both are held to the same standard. This site is an attempt to show that. The figures are drawn live in your browser from ten layers of ASCII, split by brightness and shifting as you move. Set in Newsreader and IBM Plex Mono, with International Klein Blue as the only accent, and built in plain HTML, CSS and JavaScript.</p>
+    <nav class="links label" aria-label="Contact">
+      <a class="link plain" href="mailto:alinakuznetsova7@gmail.com">Email</a>
+      <a class="link plain" href="https://www.linkedin.com/in/alina-kuznetsova-74a386204/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </footer>
 
   <script src="js/main.js"></script>
-  <script>
-  (function() {
-
-    // ── HERO PORTRAIT ──
-    Portfolio.renderASCII({
-      src: 'images/face.png',
-      wrap: document.getElementById('wrap-handshake'),
-      fontSize: 3,
-      toneMode: 'portrait',
-      scale: 0.88,
-      onDone: function(layers, PX, PY) {
-        Portfolio.initParallax(document.getElementById('wrap-handshake'), layers, PX, PY, 0.7);
-      }
-    });
-    var pcHero = document.getElementById('pc-hero');
-    if (pcHero) Portfolio.initEdgeParticles(pcHero, ['AI','&&','//','{}','<>','01','ML','++','>>','::'], 28);
-
-    // ── PROJECT ICONS -- exact copy of project page renderer ──
-    var NUM_LAYERS = 10;
-    var RAMP = " .-_,:;~=+<>[]{}()|/tfjrxnuvzXYJCLQ0Zmwqdbkha*#MW8%B@$";
-    var R = RAMP.length;
-    var OPACITIES = [0.14,0.22,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0];
-    var PX = [0.4,0.9,1.6,2.5,3.6,5.0,6.6,8.4,10.5,13.0];
-    var PY = [0.3,0.6,1.1,1.7,2.4,3.3,4.4,5.6,7.0,8.8];
-
-    function renderIcon(src, wrapId, visualId, pcId, chars, scale) {
-      var wrap = document.getElementById(wrapId);
-      var col = document.getElementById(visualId);
-      scale = scale || 0.97;
-      var layerEls = [];
-      for (var i = 0; i < NUM_LAYERS; i++) {
-        var pre = document.createElement('pre');
-        pre.className = 'ascii-layer-proj';
-        pre.style.zIndex = i;
-        wrap.appendChild(pre);
-        pre.style.color = 'rgba(237,232,223,' + OPACITIES[i] + ')';
-        layerEls.push(pre);
-      }
-      var off = document.createElement('canvas');
-      off.style.display = 'none';
-      document.body.appendChild(off);
-      var img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = function() {
-        setTimeout(function() {
-          var CW = 4 * 0.601, CH = 4 * 1.14;
-          var imgA = img.width / img.height;
-          var ROWS = Math.round(col.clientHeight * scale / CH);
-          var COLS = Math.round(ROWS * imgA * (CH / CW));
-          var maxC = Math.round(col.clientWidth * 0.97 / CW);
-          if (COLS > maxC) { COLS = maxC; ROWS = Math.round(COLS / imgA * (CW / CH)); }
-          off.width = COLS; off.height = ROWS;
-          var ctx = off.getContext('2d');
-          ctx.drawImage(img, 0, 0, COLS, ROWS);
-          var data = ctx.getImageData(0, 0, COLS, ROWS).data;
-          var raw = [];
-          for (var i = 0; i < data.length; i += 4) {
-            var r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
-            if (a < 30 || (r > 230 && g > 230 && b > 230)) { raw.push(-1); continue; }
-            var lum = (0.299*r + 0.587*g + 0.114*b) / 255;
-            var lv = 1 - lum;
-            raw.push(lv < 0.04 ? -1 : Math.pow(lv, 0.85));
-          }
-          var valid = raw.filter(function(v){return v>=0;}).sort(function(a,b){return a-b;});
-          var lo = valid[Math.floor(valid.length*0.005)];
-          var hi = valid[Math.floor(valid.length*0.995)];
-          var norm = raw.map(function(v){return v<0?-1:Math.max(0,Math.min(1,(v-lo)/(hi-lo)));});
-          var bw = 1 / NUM_LAYERS;
-          for (var li = 0; li < NUM_LAYERS; li++) {
-            var mn = li*bw, mx = mn+bw+0.012, out = '';
-            for (var row = 0; row < ROWS; row++) {
-              for (var c = 0; c < COLS; c++) {
-                var d = norm[row*COLS+c];
-                out += (d>=0&&d>=mn&&d<mx) ? RAMP[Math.min(Math.floor(d*R),R-1)] : ' ';
-              }
-              out += '\n';
-            }
-            layerEls[li].textContent = out;
-          }
-          var tx=0,ty=0,cx=0,cy=0;
-          window.addEventListener('mousemove',function(e){
-            tx=(e.clientX/window.innerWidth-0.5)*2;
-            ty=(e.clientY/window.innerHeight-0.5)*2;
-          });
-          (function tick(){
-            cx+=(tx-cx)*0.055; cy+=(ty-cy)*0.055;
-            wrap.style.transform='perspective(1000px) rotateY('+(cx*8)+'deg) rotateX('+(-cy*5)+'deg)';
-            for(var i=0;i<layerEls.length;i++)
-              layerEls[i].style.transform='translate('+(cx*-PX[i]*0.7)+'px,'+(cy*-PY[i]*0.7)+'px)';
-            requestAnimationFrame(tick);
-          })();
-        }, 100);
-      };
-      img.src = src;
-      var pc = document.getElementById(pcId);
-      if (pc && Portfolio.particleChars[chars]) {
-        Portfolio.initEdgeParticles(pc, Portfolio.particleChars[chars], 28);
-      }
-    }
-
-    renderIcon('images/nca.webp',  'wrap-nca',    'visual-new-natures', 'pc-new-natures', 'newnatures');
-    renderIcon('images/chess.webp', 'wrap-chess',  'visual-rematch',     'pc-rematch',     'rematch');
-    renderIcon('images/mush.webp',  'wrap-mush',   'visual-borderless',  'pc-borderless',  'borderless');
-    renderIcon('images/skull.webp', 'wrap-brush',  'visual-midjourney',  'pc-midjourney',  'midjourney');
-
-    // ── UFO ──
-    renderIcon('images/ufo.webp', 'ufo-wrap', 'visual-piblo', 'pc-piblo', 'piblo', 0.55);
-
-  })();
-  </script>
 </body>
 </html>
