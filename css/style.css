@@ -148,16 +148,19 @@ a { color: inherit; }
 .mh-end  { grid-column: 9 / 13; text-align: right; display: flex; justify-content: flex-end; gap: var(--s3); }
 
 /* ── figures ── */
-.fig { display: flex; flex-direction: column; gap: var(--s2); }
+.fig { display: flex; flex-direction: column; gap: 12px; }
 .fig-art { display: flex; align-items: center; justify-content: center; position: relative; }
+/* the drawing sits on its caption: art anchored to the bottom of its box, caption centred directly beneath, no rule */
+.fig:has(.fig-cap) .fig-art { align-items: flex-end; }
 .fig-cap {
-  border-top: 1px solid var(--rule);
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s2);
+  display: block;
+  text-align: center;
+  text-wrap: balance;
+  font-size: var(--fs-label);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
 }
-.fig-cap b { color: var(--ink); font-weight: 500; }
+.fig-cap b { color: var(--ink); font-weight: 500; margin-right: 6px; }
 
 /* ── ascii ── */
 .ascii { position: relative; will-change: transform; line-height: 0; }
@@ -495,7 +498,7 @@ a { color: inherit; }
   .contents li a > .label:last-child { display: none; }
   .plate-meta { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: var(--s3); }
   .plate-meta .meta { flex-basis: 100%; }
-  .plate-art .fig-art { min-height: 300px; }
+  .plate-art .fig-art, .appendix-art .fig-art { min-height: 0; }
   .specimens, .specimens.four, .series, .figrow.three, .figrow.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cards, .cards.two, .caps { grid-template-columns: 1fr; }
   .data.six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--s3); }
