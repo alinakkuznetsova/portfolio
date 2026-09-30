@@ -148,19 +148,26 @@ a { color: inherit; }
 .mh-end  { grid-column: 9 / 13; text-align: right; display: flex; justify-content: flex-end; gap: var(--s3); }
 
 /* ── figures ── */
+/* a figure spans the full height of the text beside it: the drawing's box starts level with the title,
+   the caption rule sits level with the last line of the text, and the drawing is centred between them */
 .fig { display: flex; flex-direction: column; gap: 12px; }
-.fig-art { display: flex; align-items: center; justify-content: center; position: relative; }
-/* the drawing sits on its caption: art anchored to the bottom of its box, caption centred directly beneath, no rule */
-.fig:has(.fig-cap) .fig-art { align-items: flex-end; }
+.fig-art { display: flex; align-items: center; justify-content: center; position: relative; flex: 1 1 auto; }
 .fig-cap {
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
   display: block;
-  text-align: center;
-  text-wrap: balance;
   font-size: var(--fs-label);
   letter-spacing: 0.04em;
   line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.fig-cap b { color: var(--ink); font-weight: 500; margin-right: 6px; }
+.fig-cap b { color: var(--ink); font-weight: 500; margin-right: 8px; }
+.plate-art, .appendix-art, .hero-fig { align-self: stretch; }
+/* the text column runs the same height as its figure: title level with the top of the drawing's box, links level with the caption */
+.plate-body, .appendix-body { display: flex; flex-direction: column; align-self: stretch; }
+.plate-body .links, .appendix-body .links { margin-top: auto; padding-top: var(--s4); }
 
 /* ── ascii ── */
 .ascii { position: relative; will-change: transform; line-height: 0; }
@@ -211,7 +218,6 @@ a { color: inherit; }
 .meta dd a { color: var(--klein); text-decoration: none; border-bottom: 1px solid currentColor; }
 .plate-title { font-size: var(--fs-h2); font-weight: 400; line-height: 1; letter-spacing: -0.015em; margin-bottom: var(--s3); }
 .plate-body .prose { margin-bottom: var(--s4); }
-.plate-body .links { margin-top: var(--s4); }
 
 /* plate layouts: the meta column is fixed, the rest composes to the evidence */
 .plate--lead  .plate-art  { grid-column: 4 / 8; }
@@ -223,7 +229,7 @@ a { color: inherit; }
 .plate--split .plate-art  { grid-column: 4 / 7; }
 .plate--split .plate-body { grid-column: 7 / 13; }
 .plate--split .plate-extra{ grid-column: 4 / 13; }
-.plate-art .fig-art { min-height: 380px; }
+.plate-art .fig-art { min-height: 320px; }
 .plate-extra { display: grid; gap: var(--s6); }
 
 /* data row: real figures from the project */
@@ -261,11 +267,10 @@ a { color: inherit; }
 /* appendix */
 .appendix { border-top: 1px dashed var(--graphite); padding-block: var(--s6) var(--s12); row-gap: var(--s4); }
 .appendix-meta { grid-column: 1 / 4; }
-.appendix-art  { grid-column: 4 / 6; }
-.appendix-art .fig-art { min-height: 200px; }
+.appendix-art  { grid-column: 4 / 7; }
+.appendix-art .fig-art { min-height: 220px; }
 .appendix-body { grid-column: 7 / 13; }
 .appendix-body .plate-title { font-size: var(--fs-h3); }
-.appendix-body .links { margin-top: var(--s3); }
 
 /* about */
 .about { border-top: 1px solid var(--ink); padding-block: var(--s6) var(--s12); row-gap: var(--s6); }
@@ -483,7 +488,6 @@ a { color: inherit; }
   .sec-note { grid-column: 4 / 13; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .data { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s3); }
-  .appendix-art { grid-column: 4 / 7; }
   .appendix-body { grid-column: 7 / 13; }
 }
 
@@ -499,6 +503,8 @@ a { color: inherit; }
   .plate-meta { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: var(--s3); }
   .plate-meta .meta { flex-basis: 100%; }
   .plate-art .fig-art, .appendix-art .fig-art { min-height: 0; }
+  .fig-cap { white-space: normal; }
+  .plate-body .links, .appendix-body .links { margin-top: 0; }
   .specimens, .specimens.four, .series, .figrow.three, .figrow.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cards, .cards.two, .caps { grid-template-columns: 1fr; }
   .data.six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--s3); }
