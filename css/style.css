@@ -165,6 +165,10 @@ a { color: inherit; }
 }
 .fig-cap b { color: var(--ink); font-weight: 500; margin-right: 8px; }
 .plate-art, .appendix-art, .hero-fig { align-self: stretch; }
+/* breathing room between each drawing and the text beside it */
+.plate--lead .plate-art, .appendix-art { padding-right: var(--s6); }
+.plate--split .plate-art { padding-right: var(--s4); }
+.plate--right .plate-art { padding-left: var(--s6); }
 /* the text column runs the same height as its figure: title level with the top of the drawing's box, links level with the caption */
 .plate-body, .appendix-body { display: flex; flex-direction: column; align-self: stretch; }
 .plate-body .links, .appendix-body .links { margin-top: auto; padding-top: var(--s4); }
@@ -504,6 +508,7 @@ a { color: inherit; }
   .plate-meta .meta { flex-basis: 100%; }
   .plate-art .fig-art, .appendix-art .fig-art { min-height: 0; }
   .fig-cap { white-space: normal; }
+  .plate--lead .plate-art, .plate--split .plate-art, .appendix-art, .plate--right .plate-art { padding: 0; }
   .plate-body .links, .appendix-body .links { margin-top: 0; }
   .specimens, .specimens.four, .series, .figrow.three, .figrow.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cards, .cards.two, .caps { grid-template-columns: 1fr; }
